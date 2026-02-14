@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  --ds-bg: 193 232 255;
+  --ds-bg: 255 255 255;
   --ds-fg: 2 16 36;
   --ds-muted: 125 160 202;
   --ds-accent: 84 131 179;
@@ -11,7 +11,7 @@
 }
 
 :root[data-theme="crock"] {
-  --ds-bg: 193 232 255;
+  --ds-bg: 255 255 255;
   --ds-fg: 2 16 36;
   --ds-muted: 125 160 202;
   --ds-accent: 84 131 179;
