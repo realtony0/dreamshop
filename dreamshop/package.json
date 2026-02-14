@@ -1,0 +1,46 @@
+{
+  "name": "dreamshop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev:daemon": "node scripts/dev-daemon.mjs start --port 3001",
+    "dev:stop": "node scripts/dev-daemon.mjs stop",
+    "dev:status": "node scripts/dev-daemon.mjs status --port 3001",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:push": "node -e \"require('fs').closeSync(require('fs').openSync('dev.db','a'))\" && prisma db push",
+    "db:seed": "node prisma/seed.mjs",
+    "db:setup": "npm run db:push && npm run db:seed",
+    "db:studio": "prisma studio",
+    "photos:group": "python3 scripts/group_photos.py --source .. --dest ./public/products/imported --report ./import/photos-report.json --clean",
+    "photos:import": "node scripts/import_from_report.mjs --report ./import/photos-report.json --reset",
+    "photos:setup": "npm run photos:group && npm run photos:import"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.17.0",
+    "@prisma/adapter-libsql": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "clsx": "^2.1.1",
+    "jose": "^6.1.3",
+    "lucide-react": "^0.564.0",
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.3.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "prisma": "^7.4.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

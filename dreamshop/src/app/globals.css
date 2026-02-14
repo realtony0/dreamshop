@@ -1,0 +1,85 @@
+@config "../../tailwind.config.js";
+@import "tailwindcss";
+
+:root {
+  --ds-bg: 193 232 255;
+  --ds-fg: 2 16 36;
+  --ds-muted: 125 160 202;
+  --ds-accent: 84 131 179;
+  --ds-border: 84 131 179;
+  --ds-card: 207 234 255;
+}
+
+:root[data-theme="crock"] {
+  --ds-bg: 193 232 255;
+  --ds-fg: 2 16 36;
+  --ds-muted: 125 160 202;
+  --ds-accent: 84 131 179;
+  --ds-border: 84 131 179;
+  --ds-card: 207 234 255;
+}
+
+:root[data-theme="mono"] {
+  --ds-bg: 10 10 10;
+  --ds-fg: 245 245 245;
+  --ds-muted: 22 22 22;
+  --ds-accent: 22 163 74;
+  --ds-border: 52 52 52;
+  --ds-card: 14 14 14;
+}
+
+:root[data-theme="sand"] {
+  --ds-bg: 246 241 233;
+  --ds-fg: 28 24 20;
+  --ds-muted: 234 226 214;
+  --ds-accent: 96 66 46;
+  --ds-border: 210 196 175;
+  --ds-card: 250 247 241;
+}
+
+:root[data-theme="slate"] {
+  --ds-bg: 11 15 22;
+  --ds-fg: 233 238 246;
+  --ds-muted: 21 30 42;
+  --ds-accent: 96 165 250;
+  --ds-border: 46 59 78;
+  --ds-card: 15 21 31;
+}
+
+:root[data-theme="white"] {
+  --ds-bg: 255 255 255;
+  --ds-fg: 15 15 15;
+  --ds-muted: 246 246 246;
+  --ds-accent: 15 15 15;
+  --ds-border: 226 226 226;
+  --ds-card: 255 255 255;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-fg antialiased;
+    font-feature-settings: "ss01" 1, "ss02" 1, "cv01" 1;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  ::selection {
+    background: rgb(var(--ds-accent) / 0.25);
+  }
+}
+
+@layer utilities {
+  .clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "source": "/Users/admin/Desktop/Dreamshop",
+  "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported",
+  "simThreshold": 18,
+  "colorThreshold": 45.0,
+  "productCount": 6,
+  "products": [
+    {
+      "slug": "import-set-01",
+      "category": "SET",
+      "sourceCount": 18,
+      "variants": [
+        {
+          "colorName": "Gris",
+          "colorHex": "#e1dedf",
+          "colorSlug": "gris",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5244.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/01.jpg",
+              "url": "/products/imported/import-set-01/gris/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5246.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/02.jpg",
+              "url": "/products/imported/import-set-01/gris/02.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5247.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/03.jpg",
+              "url": "/products/imported/import-set-01/gris/03.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5248.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/04.jpg",
+              "url": "/products/imported/import-set-01/gris/04.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5251.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/05.jpg",
+              "url": "/products/imported/import-set-01/gris/05.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5253.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/06.jpg",
+              "url": "/products/imported/import-set-01/gris/06.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5256.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/07.jpg",
+              "url": "/products/imported/import-set-01/gris/07.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5258.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/08.jpg",
+              "url": "/products/imported/import-set-01/gris/08.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Bleu",
+          "colorHex": "#2a2d3a",
+          "colorSlug": "bleu",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5245.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/01.jpg",
+              "url": "/products/imported/import-set-01/bleu/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5249.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/02.jpg",
+              "url": "/products/imported/import-set-01/bleu/02.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5250.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/03.jpg",
+              "url": "/products/imported/import-set-01/bleu/03.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5254.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/04.jpg",
+              "url": "/products/imported/import-set-01/bleu/04.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5257.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/05.jpg",
+              "url": "/products/imported/import-set-01/bleu/05.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5260.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/06.jpg",
+              "url": "/products/imported/import-set-01/bleu/06.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5261.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/07.jpg",
+              "url": "/products/imported/import-set-01/bleu/07.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Gris 2",
+          "colorHex": "#beada6",
+          "colorSlug": "gris-2",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5252.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris-2/01.jpg",
+              "url": "/products/imported/import-set-01/gris-2/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5255.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris-2/02.jpg",
+              "url": "/products/imported/import-set-01/gris-2/02.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5259.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris-2/03.jpg",
+              "url": "/products/imported/import-set-01/gris-2/03.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-set-02",
+      "category": "SET",
+      "sourceCount": 12,
+      "variants": [
+        {
+          "colorName": "Noir",
+          "colorHex": "#23262d",
+          "colorSlug": "noir",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5232.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/01.jpg",
+              "url": "/products/imported/import-set-02/noir/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5234.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/02.jpg",
+              "url": "/products/imported/import-set-02/noir/02.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5236.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/03.jpg",
+              "url": "/products/imported/import-set-02/noir/03.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5242.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/04.jpg",
+              "url": "/products/imported/import-set-02/noir/04.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5243.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/05.jpg",
+              "url": "/products/imported/import-set-02/noir/05.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Gris",
+          "colorHex": "#e4e4e0",
+          "colorSlug": "gris",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5237.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris/01.jpg",
+              "url": "/products/imported/import-set-02/gris/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5238.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris/02.jpg",
+              "url": "/products/imported/import-set-02/gris/02.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5239.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris/03.jpg",
+              "url": "/products/imported/import-set-02/gris/03.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Gris 2",
+          "colorHex": "#959697",
+          "colorSlug": "gris-2",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5240.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris-2/01.jpg",
+              "url": "/products/imported/import-set-02/gris-2/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5241.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris-2/02.jpg",
+              "url": "/products/imported/import-set-02/gris-2/02.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Rose",
+          "colorHex": "#9a4161",
+          "colorSlug": "rose",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5233.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/rose/01.jpg",
+              "url": "/products/imported/import-set-02/rose/01.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Bleu",
+          "colorHex": "#48a3cb",
+          "colorSlug": "bleu",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5235.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/bleu/01.jpg",
+              "url": "/products/imported/import-set-02/bleu/01.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-hoodie-01",
+      "category": "HOODIE",
+      "sourceCount": 5,
+      "variants": [
+        {
+          "colorName": "Beige",
+          "colorHex": "#c1a68e",
+          "colorSlug": "beige",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5290.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/beige/01.jpg",
+              "url": "/products/imported/import-hoodie-01/beige/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5291.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/beige/02.jpg",
+              "url": "/products/imported/import-hoodie-01/beige/02.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Marron",
+          "colorHex": "#8a7f75",
+          "colorSlug": "marron",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5277.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/marron/01.jpg",
+              "url": "/products/imported/import-hoodie-01/marron/01.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Gris",
+          "colorHex": "#d7dce3",
+          "colorSlug": "gris",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5278.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/gris/01.jpg",
+              "url": "/products/imported/import-hoodie-01/gris/01.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Bleu",
+          "colorHex": "#54516f",
+          "colorSlug": "bleu",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5279.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/bleu/01.jpg",
+              "url": "/products/imported/import-hoodie-01/bleu/01.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-set-03",
+      "category": "SET",
+      "sourceCount": 4,
+      "variants": [
+        {
+          "colorName": "Gris",
+          "colorHex": "#958482",
+          "colorSlug": "gris",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5271.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris/01.jpg",
+              "url": "/products/imported/import-set-03/gris/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5272.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris/02.jpg",
+              "url": "/products/imported/import-set-03/gris/02.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5274.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris/03.jpg",
+              "url": "/products/imported/import-set-03/gris/03.jpg"
+            }
+          ]
+        },
+        {
+          "colorName": "Gris 2",
+          "colorHex": "#c3bbbe",
+          "colorSlug": "gris-2",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5270.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris-2/01.jpg",
+              "url": "/products/imported/import-set-03/gris-2/01.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-hoodie-02",
+      "category": "HOODIE",
+      "sourceCount": 2,
+      "variants": [
+        {
+          "colorName": "Beige",
+          "colorHex": "#edc19f",
+          "colorSlug": "beige",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5275.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-02/beige/01.jpg",
+              "url": "/products/imported/import-hoodie-02/beige/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5276.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-02/beige/02.jpg",
+              "url": "/products/imported/import-hoodie-02/beige/02.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-hoodie-03",
+      "category": "HOODIE",
+      "sourceCount": 2,
+      "variants": [
+        {
+          "colorName": "Noir",
+          "colorHex": "#2a2a2a",
+          "colorSlug": "noir",
+          "images": [
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5292.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-03/noir/01.jpg",
+              "url": "/products/imported/import-hoodie-03/noir/01.jpg"
+            },
+            {
+              "source": "/Users/admin/Desktop/Dreamshop/IMG_5293.JPG",
+              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-03/noir/02.jpg",
+              "url": "/products/imported/import-hoodie-03/noir/02.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Product {
+  id          String           @id @default(cuid())
+  slug        String           @unique
+  name        String
+  description String
+  category    ProductCategory
+  priceCents  Int
+  featured    Boolean          @default(false)
+  active      Boolean          @default(true)
+  variants    ProductVariant[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id        String         @id @default(cuid())
+  productId String
+  product   Product        @relation(fields: [productId], references: [id], onDelete: Cascade)
+  colorName String
+  colorHex  String?
+  images    ProductImage[]
+  stock     StockItem[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@unique([productId, colorName])
+}
+
+model ProductImage {
+  id        String         @id @default(cuid())
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  url       String
+  alt       String?
+  sort      Int            @default(0)
+}
+
+model StockItem {
+  id        String         @id @default(cuid())
+  variantId String
+  variant   ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+  size      String
+  quantity  Int            @default(0)
+
+  @@unique([variantId, size])
+}
+
+model Order {
+  id         String       @id @default(cuid())
+  status     OrderStatus  @default(PENDING)
+  email      String
+  firstName  String
+  lastName   String
+  phone      String?
+  address1   String
+  address2   String?
+  postalCode String
+  city       String
+  country    String
+  totalCents Int
+  items      OrderItem[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+}
+
+model OrderItem {
+  id            String @id @default(cuid())
+  orderId       String
+  order         Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  variantId     String
+  productName   String
+  colorName     String
+  size          String
+  quantity      Int
+  unitPriceCents Int
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  CANCELED
+}
+
+enum ProductCategory {
+  HOODIE
+  SET
+}
