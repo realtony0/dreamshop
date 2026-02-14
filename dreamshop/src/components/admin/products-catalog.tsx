@@ -118,7 +118,7 @@ export function AdminProductsCatalog({
             className="h-11 rounded-xl border border-border bg-bg px-4 text-sm text-fg outline-none transition focus:ring-2 focus:ring-accent/35"
           >
             <option value="ALL">Toutes</option>
-            <option value="HOODIE">Hoodies</option>
+            <option value="HOODIE">Pieces</option>
             <option value="SET">Ensembles</option>
           </select>
         </div>
@@ -151,15 +151,15 @@ export function AdminProductsCatalog({
                 key={product.id}
                 className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/50"
               >
-                <div className="grid grid-cols-[64px_1fr] gap-3 md:grid-cols-[64px_1fr_auto]">
-                  <div className="relative h-16 w-16 overflow-hidden rounded-xl bg-muted">
+                <div className="grid grid-cols-[56px_1fr] gap-3 md:grid-cols-[56px_1fr_auto]">
+                  <div className="relative h-14 w-14 overflow-hidden rounded-xl bg-muted">
                     {product.coverImage ? (
                       <Image
                         src={product.coverImage}
                         alt={product.name}
                         fill
-                        sizes="64px"
-                        className="object-contain p-1"
+                        sizes="56px"
+                        className="object-cover"
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center text-[10px] font-black uppercase tracking-[0.15em] text-fg/45">
@@ -173,7 +173,7 @@ export function AdminProductsCatalog({
 
                     <div className="mt-3 flex flex-wrap items-center gap-2">
                       <span className="inline-flex rounded-full border border-border bg-bg px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-fg/70">
-                        {product.category === "HOODIE" ? "Hoodie" : "Ensemble"}
+                        {product.category === "HOODIE" ? "Piece" : "Ensemble"}
                       </span>
                       <span className="inline-flex rounded-full border border-border bg-bg px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-fg/70">
                         {product.active ? "Actif" : "Off"}
@@ -266,7 +266,7 @@ export function AdminProductsCatalog({
                                 alt={variant.colorName}
                                 fill
                                 sizes="24px"
-                                className="object-contain p-0.5"
+                                className="object-cover"
                               />
                             </div>
                           ))}

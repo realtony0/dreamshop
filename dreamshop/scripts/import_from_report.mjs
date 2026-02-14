@@ -42,18 +42,31 @@ const defaultStock = [
 ];
 
 function priceForCategory(category) {
-  return category === "SET" ? 30000 : 20000;
+  return category === "SET" ? 30000 : 30000;
 }
 
 function nameFor(category, index) {
   const n = String(index).padStart(2, "0");
-  return category === "SET" ? `Lululemon Tech Set ${n}` : `Hoodie Core ${n}`;
+  return category === "SET" ? `Lulelemon Set ${n}` : `Piece ${n}`;
 }
 
 function descriptionFor(category) {
   return category === "SET"
-    ? "Ensemble tech fleece premium (haut + bas). Silhouette clean, confort max. Stock par taille — drop limité."
-    : "Hoodie premium coupe relax. Molleton confortable, finitions clean. Stock par taille — drop limité.";
+    ? "Ensemble premium (haut + bas). Silhouette clean, confort max. Stock par taille — drop limite."
+    : "Piece premium streetwear. Finitions clean, coupe moderne, stock par taille.";
+}
+
+function toNonEmptyString(value) {
+  if (typeof value !== "string") return null;
+  const trimmed = value.trim();
+  return trimmed ? trimmed : null;
+}
+
+function toPositiveInteger(value) {
+  const n = Number(value);
+  if (!Number.isFinite(n)) return null;
+  const rounded = Math.round(n);
+  return rounded > 0 ? rounded : null;
 }
 
 function hexToRgb(hex) {
@@ -144,6 +157,12 @@ try {
     else hoodieIndex += 1;
 
     const idx = category === "SET" ? setIndex : hoodieIndex;
+    const name = toNonEmptyString(p.name) ?? nameFor(category, idx);
+    const description =
+      toNonEmptyString(p.description) ?? descriptionFor(category);
+    const priceCents = toPositiveInteger(p.priceCents) ?? priceForCategory(category);
+    const featured =
+      typeof p.featured === "boolean" ? p.featured : Boolean(p.sourceCount >= 6);
 
     const rawVariants = (p.variants ?? []).map((v) => ({
       colorName: String(v.colorName ?? "Couleur"),
@@ -170,18 +189,20 @@ try {
       where: { slug: p.slug },
       create: {
         slug: p.slug,
-        name: nameFor(category, idx),
-        description: descriptionFor(category),
+        name,
+        description,
         category,
-        priceCents: priceForCategory(category),
-        featured: Boolean(p.sourceCount >= 6),
+        priceCents,
+        featured,
         active: true,
         variants: { create: variants },
       },
       update: {
+        name,
+        description,
         category,
-        priceCents: priceForCategory(category),
-        featured: Boolean(p.sourceCount >= 6),
+        priceCents,
+        featured,
         active: true,
         variants: {
           deleteMany: {},

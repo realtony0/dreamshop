@@ -99,7 +99,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <Link href="/shop" className="hover:text-fg">
             Boutique
           </Link>{" "}
-          / {product.category === "HOODIE" ? "Hoodies" : "Ensembles"}
+          / {product.category === "HOODIE" ? "Pieces" : "Ensembles"}
         </div>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.25fr_0.9fr]">

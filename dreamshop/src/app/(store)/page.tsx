@@ -40,7 +40,7 @@ export default async function HomePage() {
             className="mx-auto mt-6 max-w-xl text-base font-medium text-white/85 md:text-lg lg:text-xl"
             style={{ textShadow: "2px 2px 8px rgba(0,0,0,0.8)" }}
           >
-            Hoodies et ensembles premium. Coupe propre, stock réel par taille, livraison rapide.
+            Pieces et ensembles premium. Coupe propre, stock reel par taille, livraison rapide.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">

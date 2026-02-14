@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Dreamshop — Streetwear premium",
-  description: "Hoodies et ensembles tech fleece. Minimal. Visuel. Premium.",
+  description: "Pieces et ensembles premium. Minimal. Visuel. Street.",
 };
 
 export default function RootLayout({

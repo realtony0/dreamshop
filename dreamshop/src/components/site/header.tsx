@@ -30,7 +30,7 @@ const navItems: NavItem[] = [
       pathname.startsWith("/checkout"),
   },
   {
-    label: "Hoodies",
+    label: "Pieces",
     href: "/shop?category=HOODIE",
     isActive: () => false,
   },
@@ -55,7 +55,7 @@ function DesktopNavLink({
       href={href}
       className={cn(
         "relative px-6 py-3 text-sm font-black uppercase tracking-wider transition-colors",
-        active ? "text-bg" : "text-bg/65 hover:text-bg"
+        active ? "text-fg" : "text-fg/65 hover:text-fg"
       )}
     >
       {children}
@@ -82,12 +82,12 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/45 bg-[rgb(5_38_89/0.95)] shadow-lg backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border/45 bg-card/95 shadow-sm backdrop-blur-md">
       <Container className="flex h-20 items-center justify-between">
         <div className="flex flex-1 items-center">
           <Link
             href="/"
-            className="text-2xl font-black uppercase tracking-tight text-bg transition-colors hover:text-accent"
+            className="text-2xl font-black uppercase tracking-tight text-fg transition-colors hover:text-accent"
           >
             Dreamshop
           </Link>
@@ -108,11 +108,11 @@ export function Header() {
         </nav>
 
         <div className="flex flex-1 items-center justify-end gap-3">
-          <CartLink className="text-bg hover:text-accent" />
+          <CartLink className="text-fg hover:text-accent" />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-bg/20 text-bg transition-colors hover:text-accent lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border text-fg transition-colors hover:text-accent lg:hidden"
             aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
           >
@@ -123,8 +123,8 @@ export function Header() {
 
       {open ? (
         <div className="lg:hidden">
-          <div className="fixed inset-0 z-40 bg-[rgb(2_16_36/0.72)]" onClick={() => setOpen(false)} />
-          <div className="fixed inset-x-0 top-20 z-50 border-t border-bg/20 bg-[rgb(5_38_89/0.95)] backdrop-blur-md">
+          <div className="fixed inset-0 z-40 bg-black/30" onClick={() => setOpen(false)} />
+          <div className="fixed inset-x-0 top-20 z-50 border-t border-border bg-card/95 backdrop-blur-md">
             <Container className="py-6">
               <div className="grid gap-2">
                 {navItems.map((item) => (
@@ -134,8 +134,8 @@ export function Header() {
                     className={cn(
                       "rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-wider transition-colors",
                       item.isActive(pathname)
-                        ? "bg-accent text-bg"
-                        : "text-bg/80 hover:bg-bg/12 hover:text-bg"
+                        ? "bg-fg text-bg"
+                        : "text-fg/80 hover:bg-muted hover:text-fg"
                     )}
                     onClick={() => setOpen(false)}
                   >

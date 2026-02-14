@@ -4,8 +4,8 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import { defaultTheme, isThemeId, themes, type ThemeId } from "@/lib/themes";
 
-const storageKey = "ds_theme";
-const explicitKey = "ds_theme_explicit";
+const storageKey = "ds_theme_v2";
+const explicitKey = "ds_theme_explicit_v2";
 
 export function ThemeSwitcher({
   className,

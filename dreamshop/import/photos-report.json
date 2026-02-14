@@ -1,375 +1,272 @@
 {
   "source": "/Users/admin/Desktop/Dreamshop",
   "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported",
-  "simThreshold": 18,
-  "colorThreshold": 45.0,
-  "productCount": 6,
+  "productCount": 9,
   "products": [
     {
       "slug": "import-set-01",
       "category": "SET",
+      "name": "Lulelemon Sculpt Set",
+      "description": "Ensemble 3 pieces premium (veste + top + legging). Coupe clean et fit moderne.",
+      "priceCents": 30000,
+      "featured": true,
       "sourceCount": 18,
       "variants": [
         {
-          "colorName": "Gris",
-          "colorHex": "#e1dedf",
-          "colorSlug": "gris",
+          "colorName": "Ivoire",
+          "colorHex": "#eae6e2",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5244.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/01.jpg",
-              "url": "/products/imported/import-set-01/gris/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5246.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/02.jpg",
-              "url": "/products/imported/import-set-01/gris/02.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5247.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/03.jpg",
-              "url": "/products/imported/import-set-01/gris/03.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5248.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/04.jpg",
-              "url": "/products/imported/import-set-01/gris/04.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5251.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/05.jpg",
-              "url": "/products/imported/import-set-01/gris/05.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5253.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/06.jpg",
-              "url": "/products/imported/import-set-01/gris/06.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5256.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/07.jpg",
-              "url": "/products/imported/import-set-01/gris/07.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5258.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris/08.jpg",
-              "url": "/products/imported/import-set-01/gris/08.jpg"
-            }
+            { "url": "/products/imported/import-set-01/gris/01.jpg" },
+            { "url": "/products/imported/import-set-01/gris/02.jpg" },
+            { "url": "/products/imported/import-set-01/gris/03.jpg" },
+            { "url": "/products/imported/import-set-01/gris/04.jpg" },
+            { "url": "/products/imported/import-set-01/gris/05.jpg" },
+            { "url": "/products/imported/import-set-01/gris/06.jpg" },
+            { "url": "/products/imported/import-set-01/gris/07.jpg" },
+            { "url": "/products/imported/import-set-01/gris/08.jpg" }
           ]
         },
         {
-          "colorName": "Bleu",
-          "colorHex": "#2a2d3a",
-          "colorSlug": "bleu",
+          "colorName": "Bleu Nuit",
+          "colorHex": "#1f3357",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5245.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/01.jpg",
-              "url": "/products/imported/import-set-01/bleu/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5249.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/02.jpg",
-              "url": "/products/imported/import-set-01/bleu/02.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5250.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/03.jpg",
-              "url": "/products/imported/import-set-01/bleu/03.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5254.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/04.jpg",
-              "url": "/products/imported/import-set-01/bleu/04.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5257.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/05.jpg",
-              "url": "/products/imported/import-set-01/bleu/05.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5260.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/06.jpg",
-              "url": "/products/imported/import-set-01/bleu/06.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5261.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/bleu/07.jpg",
-              "url": "/products/imported/import-set-01/bleu/07.jpg"
-            }
+            { "url": "/products/imported/import-set-01/bleu/01.jpg" },
+            { "url": "/products/imported/import-set-01/bleu/02.jpg" },
+            { "url": "/products/imported/import-set-01/bleu/03.jpg" },
+            { "url": "/products/imported/import-set-01/bleu/04.jpg" },
+            { "url": "/products/imported/import-set-01/bleu/05.jpg" },
+            { "url": "/products/imported/import-set-01/bleu/06.jpg" },
+            { "url": "/products/imported/import-set-01/bleu/07.jpg" }
           ]
         },
         {
-          "colorName": "Gris 2",
-          "colorHex": "#beada6",
-          "colorSlug": "gris-2",
+          "colorName": "Taupe",
+          "colorHex": "#b8a39b",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5252.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris-2/01.jpg",
-              "url": "/products/imported/import-set-01/gris-2/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5255.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris-2/02.jpg",
-              "url": "/products/imported/import-set-01/gris-2/02.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5259.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-01/gris-2/03.jpg",
-              "url": "/products/imported/import-set-01/gris-2/03.jpg"
-            }
+            { "url": "/products/imported/import-set-01/gris-2/01.jpg" },
+            { "url": "/products/imported/import-set-01/gris-2/02.jpg" },
+            { "url": "/products/imported/import-set-01/gris-2/03.jpg" }
           ]
         }
       ]
     },
     {
-      "slug": "import-set-02",
+      "slug": "import-set-02-sculpt",
       "category": "SET",
-      "sourceCount": 12,
+      "name": "Lulelemon Zip Sculpt Set",
+      "description": "Ensemble zip + legging, silhouette affinee, confortable et premium.",
+      "priceCents": 30000,
+      "featured": true,
+      "sourceCount": 6,
       "variants": [
         {
           "colorName": "Noir",
-          "colorHex": "#23262d",
-          "colorSlug": "noir",
+          "colorHex": "#111316",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5232.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/01.jpg",
-              "url": "/products/imported/import-set-02/noir/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5234.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/02.jpg",
-              "url": "/products/imported/import-set-02/noir/02.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5236.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/03.jpg",
-              "url": "/products/imported/import-set-02/noir/03.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5242.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/04.jpg",
-              "url": "/products/imported/import-set-02/noir/04.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5243.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/noir/05.jpg",
-              "url": "/products/imported/import-set-02/noir/05.jpg"
-            }
+            { "url": "/products/imported/import-set-02/noir/01.jpg" },
+            { "url": "/products/imported/import-set-02/noir/02.jpg" },
+            { "url": "/products/imported/import-set-02/gris/02.jpg" }
           ]
         },
         {
-          "colorName": "Gris",
-          "colorHex": "#e4e4e0",
-          "colorSlug": "gris",
+          "colorName": "Blanc",
+          "colorHex": "#f2f2f2",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5237.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris/01.jpg",
-              "url": "/products/imported/import-set-02/gris/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5238.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris/02.jpg",
-              "url": "/products/imported/import-set-02/gris/02.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5239.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris/03.jpg",
-              "url": "/products/imported/import-set-02/gris/03.jpg"
-            }
+            { "url": "/products/imported/import-set-02/rose/01.jpg" }
           ]
         },
         {
-          "colorName": "Gris 2",
-          "colorHex": "#959697",
-          "colorSlug": "gris-2",
+          "colorName": "Fuchsia",
+          "colorHex": "#a6446c",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5240.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris-2/01.jpg",
-              "url": "/products/imported/import-set-02/gris-2/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5241.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/gris-2/02.jpg",
-              "url": "/products/imported/import-set-02/gris-2/02.jpg"
-            }
+            { "url": "/products/imported/import-set-02/bleu/01.jpg" }
           ]
         },
         {
-          "colorName": "Rose",
-          "colorHex": "#9a4161",
-          "colorSlug": "rose",
-          "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5233.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/rose/01.jpg",
-              "url": "/products/imported/import-set-02/rose/01.jpg"
-            }
-          ]
-        },
-        {
-          "colorName": "Bleu",
+          "colorName": "Bleu Ciel",
           "colorHex": "#48a3cb",
-          "colorSlug": "bleu",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5235.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-02/bleu/01.jpg",
-              "url": "/products/imported/import-set-02/bleu/01.jpg"
-            }
+            { "url": "/products/imported/import-set-02/gris-2/01.jpg" }
           ]
         }
       ]
     },
     {
-      "slug": "import-hoodie-01",
-      "category": "HOODIE",
-      "sourceCount": 5,
+      "slug": "import-set-03-hooded",
+      "category": "SET",
+      "name": "Lulelemon Hooded Wide Set",
+      "description": "Ensemble capuche avec pantalon large, look street chic et confort total.",
+      "priceCents": 30000,
+      "featured": true,
+      "sourceCount": 6,
       "variants": [
         {
-          "colorName": "Beige",
-          "colorHex": "#c1a68e",
-          "colorSlug": "beige",
+          "colorName": "Ivoire",
+          "colorHex": "#eceae7",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5290.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/beige/01.jpg",
-              "url": "/products/imported/import-hoodie-01/beige/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5291.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/beige/02.jpg",
-              "url": "/products/imported/import-hoodie-01/beige/02.jpg"
-            }
+            { "url": "/products/imported/import-set-02/noir/03.jpg" },
+            { "url": "/products/imported/import-set-02/gris/03.jpg" }
           ]
         },
         {
-          "colorName": "Marron",
-          "colorHex": "#8a7f75",
-          "colorSlug": "marron",
+          "colorName": "Anthracite",
+          "colorHex": "#343a3e",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5277.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/marron/01.jpg",
-              "url": "/products/imported/import-hoodie-01/marron/01.jpg"
-            }
+            { "url": "/products/imported/import-set-02/gris/01.jpg" },
+            { "url": "/products/imported/import-set-02/gris-2/02.jpg" }
           ]
         },
         {
-          "colorName": "Gris",
-          "colorHex": "#d7dce3",
-          "colorSlug": "gris",
+          "colorName": "Bleu Marine",
+          "colorHex": "#1d2f52",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5278.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/gris/01.jpg",
-              "url": "/products/imported/import-hoodie-01/gris/01.jpg"
-            }
+            { "url": "/products/imported/import-set-02/noir/04.jpg" }
           ]
         },
         {
-          "colorName": "Bleu",
-          "colorHex": "#54516f",
-          "colorSlug": "bleu",
+          "colorName": "Noir",
+          "colorHex": "#0d0f12",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5279.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-01/bleu/01.jpg",
-              "url": "/products/imported/import-hoodie-01/bleu/01.jpg"
-            }
+            { "url": "/products/imported/import-set-02/noir/05.jpg" }
           ]
         }
       ]
     },
     {
-      "slug": "import-set-03",
+      "slug": "import-set-04-alo",
       "category": "SET",
+      "name": "Alo Ruched Set",
+      "description": "Set crop top + legging drape, style minimal et visuel premium.",
+      "priceCents": 30000,
+      "featured": false,
       "sourceCount": 4,
       "variants": [
         {
-          "colorName": "Gris",
-          "colorHex": "#958482",
-          "colorSlug": "gris",
+          "colorName": "Noir",
+          "colorHex": "#111318",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5271.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris/01.jpg",
-              "url": "/products/imported/import-set-03/gris/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5272.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris/02.jpg",
-              "url": "/products/imported/import-set-03/gris/02.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5274.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris/03.jpg",
-              "url": "/products/imported/import-set-03/gris/03.jpg"
-            }
+            { "url": "/products/imported/import-set-03/gris-2/01.jpg" }
           ]
         },
         {
-          "colorName": "Gris 2",
-          "colorHex": "#c3bbbe",
-          "colorSlug": "gris-2",
+          "colorName": "Lilac",
+          "colorHex": "#9ca6d4",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/ensembles/IMG_5270.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-set-03/gris-2/01.jpg",
-              "url": "/products/imported/import-set-03/gris-2/01.jpg"
-            }
+            { "url": "/products/imported/import-set-03/gris/01.jpg" }
+          ]
+        },
+        {
+          "colorName": "Greige",
+          "colorHex": "#bcae9f",
+          "images": [
+            { "url": "/products/imported/import-set-03/gris/02.jpg" }
+          ]
+        },
+        {
+          "colorName": "Bleu Ardoise",
+          "colorHex": "#5a6a89",
+          "images": [
+            { "url": "/products/imported/import-set-03/gris/03.jpg" }
           ]
         }
       ]
     },
     {
-      "slug": "import-hoodie-02",
+      "slug": "import-piece-utility-pant",
       "category": "HOODIE",
-      "sourceCount": 2,
+      "name": "Utility Zip Pant",
+      "description": "Pantalon utilitaire coupe large, zip lateral, finition street premium.",
+      "priceCents": 30000,
+      "featured": true,
+      "sourceCount": 4,
       "variants": [
         {
           "colorName": "Beige",
-          "colorHex": "#edc19f",
-          "colorSlug": "beige",
+          "colorHex": "#d2b892",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5275.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-02/beige/01.jpg",
-              "url": "/products/imported/import-hoodie-02/beige/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5276.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-02/beige/02.jpg",
-              "url": "/products/imported/import-hoodie-02/beige/02.jpg"
-            }
+            { "url": "/products/imported/import-hoodie-01/beige/01.jpg" },
+            { "url": "/products/imported/import-hoodie-03/noir/01.jpg" }
+          ]
+        },
+        {
+          "colorName": "Noir",
+          "colorHex": "#121417",
+          "images": [
+            { "url": "/products/imported/import-hoodie-01/beige/02.jpg" },
+            { "url": "/products/imported/import-hoodie-03/noir/02.jpg" }
           ]
         }
       ]
     },
     {
-      "slug": "import-hoodie-03",
+      "slug": "import-piece-rugby-shirt",
       "category": "HOODIE",
+      "name": "Supreme Rugby Shirt",
+      "description": "Rugby shirt raye coupe oversized, statement piece streetwear.",
+      "priceCents": 30000,
+      "featured": false,
       "sourceCount": 2,
       "variants": [
         {
-          "colorName": "Noir",
-          "colorHex": "#2a2a2a",
-          "colorSlug": "noir",
+          "colorName": "Rose Stripe",
+          "colorHex": "#ebb6ca",
           "images": [
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5292.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-03/noir/01.jpg",
-              "url": "/products/imported/import-hoodie-03/noir/01.jpg"
-            },
-            {
-              "source": "/Users/admin/Desktop/Dreamshop/IMG_5293.JPG",
-              "dest": "/Users/admin/Desktop/Dreamshop/dreamshop/public/products/imported/import-hoodie-03/noir/02.jpg",
-              "url": "/products/imported/import-hoodie-03/noir/02.jpg"
-            }
+            { "url": "/products/imported/import-hoodie-02/beige/01.jpg" },
+            { "url": "/products/imported/import-hoodie-02/beige/02.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-piece-graphic-hoodie",
+      "category": "HOODIE",
+      "name": "Supreme Graphic Zip Hoodie",
+      "description": "Hoodie zip graphique en coton epais, vibe street archive.",
+      "priceCents": 30000,
+      "featured": false,
+      "sourceCount": 1,
+      "variants": [
+        {
+          "colorName": "Indigo",
+          "colorHex": "#4e5b8c",
+          "images": [
+            { "url": "/products/imported/import-hoodie-01/bleu/01.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-piece-baggy-denim",
+      "category": "HOODIE",
+      "name": "Supreme Baggy Denim",
+      "description": "Jean baggy lavé clair, volume loose et finition premium.",
+      "priceCents": 30000,
+      "featured": false,
+      "sourceCount": 1,
+      "variants": [
+        {
+          "colorName": "Stone Wash",
+          "colorHex": "#95b8e0",
+          "images": [
+            { "url": "/products/imported/import-hoodie-01/marron/01.jpg" }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "import-piece-camo-cargo",
+      "category": "HOODIE",
+      "name": "Supreme Camo Cargo",
+      "description": "Pantalon cargo camouflage avec coupe droite et esprit utilitaire.",
+      "priceCents": 30000,
+      "featured": false,
+      "sourceCount": 1,
+      "variants": [
+        {
+          "colorName": "Camo",
+          "colorHex": "#6c5f4c",
+          "images": [
+            { "url": "/products/imported/import-hoodie-01/gris/01.jpg" }
           ]
         }
       ]

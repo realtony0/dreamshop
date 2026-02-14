@@ -396,7 +396,7 @@ export function ProductEditor({
             onChange={(e) => update("category", e.target.value as ProductDraft["category"])}
             className="h-11 rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg outline-none transition focus:ring-2 focus:ring-accent/35"
           >
-            <option value="HOODIE">Hoodie</option>
+            <option value="HOODIE">Piece</option>
             <option value="SET">Ensemble</option>
           </select>
         </div>
@@ -574,14 +574,14 @@ export function ProductEditor({
                           {variant.images.map((image, imageIndex) => (
                             <div
                               key={`${image.url}-${imageIndex}`}
-                              className="relative h-16 w-16 overflow-hidden rounded-lg border border-border bg-muted"
+                              className="relative h-14 w-14 overflow-hidden rounded-lg border border-border bg-muted"
                             >
                               <Image
                                 src={image.url}
                                 alt={image.alt || variant.colorName}
                                 fill
-                                sizes="64px"
-                                className="object-contain p-1"
+                                sizes="56px"
+                                className="object-cover"
                               />
                               <button
                                 onClick={() => removeVariantImage(index, imageIndex)}

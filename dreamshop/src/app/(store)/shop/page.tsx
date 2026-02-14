@@ -110,7 +110,7 @@ export default async function ShopPage({
                   href={buildShopHref({ category: undefined, size, color, min, max })}
                   className="rounded-full bg-muted px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-fg/70 transition hover:bg-muted/70"
                 >
-                  {category === "HOODIE" ? "Hoodies" : "Ensembles"} ×
+                  {category === "HOODIE" ? "Pieces" : "Ensembles"} ×
                 </Link>
               ) : null}
               {size ? (
@@ -182,7 +182,7 @@ export default async function ShopPage({
                   className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
                 >
                   <option value="">Tout</option>
-                  <option value="HOODIE">Hoodies</option>
+                  <option value="HOODIE">Pieces</option>
                   <option value="SET">Ensembles</option>
                 </select>
               </div>

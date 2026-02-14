@@ -16,4 +16,4 @@ export const defaultTheme: ThemeId = isThemeId(
   process.env.NEXT_PUBLIC_DEFAULT_THEME ?? ""
 )
   ? (process.env.NEXT_PUBLIC_DEFAULT_THEME as ThemeId)
-  : "crock";
+  : "white";

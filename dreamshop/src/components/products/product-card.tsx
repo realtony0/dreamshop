@@ -26,7 +26,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const label =
     variants.length > 1
       ? `${variants.length} couleurs`
-      : first?.colorName ?? (product.category === "SET" ? "Ensemble" : "Hoodie");
+      : first?.colorName ?? (product.category === "SET" ? "Ensemble" : "Piece");
 
   return (
     <Link

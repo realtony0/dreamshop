@@ -4,8 +4,8 @@ export function ThemeScript() {
   const themeIds = themes.map((t) => t.id);
   const code = `(() => {
   try {
-    const key = "ds_theme";
-    const explicitKey = "ds_theme_explicit";
+    const key = "ds_theme_v2";
+    const explicitKey = "ds_theme_explicit_v2";
     const stored = localStorage.getItem(key);
     const explicit = localStorage.getItem(explicitKey) === "1";
     const allowed = ${JSON.stringify(themeIds)};
