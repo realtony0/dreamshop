@@ -83,16 +83,101 @@ export default async function ShopPage({
   const hasFilters = Boolean(category || size || color || minPrice || maxPrice);
   const min = typeof minPrice === "number" ? String(minPrice) : undefined;
   const max = typeof maxPrice === "number" ? String(maxPrice) : undefined;
+  const filtersForm = (
+    <form className="grid gap-5" method="get">
+      <div className="grid gap-2">
+        <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
+          Catégorie
+        </label>
+        <select
+          name="category"
+          defaultValue={category ?? ""}
+          className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
+        >
+          <option value="">Tout</option>
+          <option value="HOODIE">Pieces</option>
+          <option value="SET">Ensembles</option>
+        </select>
+      </div>
+
+      <div className="grid gap-2">
+        <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
+          Taille
+        </label>
+        <select
+          name="size"
+          defaultValue={size ?? ""}
+          className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
+        >
+          <option value="">Toutes</option>
+          {sizes.map((s) => (
+            <option key={s} value={s}>
+              {s}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid gap-2">
+        <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
+          Couleur
+        </label>
+        <select
+          name="color"
+          defaultValue={color ?? ""}
+          className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
+        >
+          <option value="">Toutes</option>
+          {colors.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        <div className="grid gap-2">
+          <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
+            Prix min
+          </label>
+          <input
+            name="min"
+            inputMode="numeric"
+            placeholder="30000"
+            defaultValue={typeof minPrice === "number" ? String(minPrice) : ""}
+            className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg placeholder:text-fg/40 transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
+          />
+        </div>
+        <div className="grid gap-2">
+          <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
+            Prix max
+          </label>
+          <input
+            name="max"
+            inputMode="numeric"
+            placeholder="60000"
+            defaultValue={typeof maxPrice === "number" ? String(maxPrice) : ""}
+            className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg placeholder:text-fg/40 transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
+          />
+        </div>
+      </div>
+
+      <button className="mt-1 h-11 rounded-xl border border-border bg-fg text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90 focus:outline-none focus:ring-2 focus:ring-accent/30">
+        Appliquer
+      </button>
+    </form>
+  );
 
   return (
-    <div className="py-12 md:py-16">
+    <div className="py-10 md:py-16">
       <Container>
         <div className="flex flex-col gap-3">
           <div className="text-xs font-black uppercase tracking-[0.28em] text-fg/60">
             Boutique
           </div>
-          <div className="flex items-end justify-between gap-6">
-            <h1 className="text-4xl font-black tracking-tight text-fg md:text-5xl">
+          <div className="flex flex-wrap items-end justify-between gap-3 sm:gap-6">
+            <h1 className="text-3xl font-black tracking-tight text-fg sm:text-4xl md:text-5xl">
               Drops
             </h1>
             <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/60">
@@ -155,8 +240,15 @@ export default async function ShopPage({
           ) : null}
         </div>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[340px_1fr]">
-          <aside className="h-fit rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/60 lg:sticky lg:top-24">
+        <details className="mt-6 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/60 lg:hidden">
+          <summary className="cursor-pointer list-none text-sm font-black uppercase tracking-[0.18em] text-fg/80">
+            Filtres
+          </summary>
+          <div className="mt-4">{filtersForm}</div>
+        </details>
+
+        <div className="mt-6 grid gap-8 lg:mt-10 lg:grid-cols-[340px_1fr]">
+          <aside className="hidden h-fit rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/60 lg:block lg:sticky lg:top-24">
             <div className="flex items-center justify-between">
               <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/70">
                 Filtres
@@ -171,89 +263,7 @@ export default async function ShopPage({
               ) : null}
             </div>
 
-            <form className="mt-6 grid gap-5" method="get">
-              <div className="grid gap-2">
-                <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
-                  Catégorie
-                </label>
-                <select
-                  name="category"
-                  defaultValue={category ?? ""}
-                  className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
-                >
-                  <option value="">Tout</option>
-                  <option value="HOODIE">Pieces</option>
-                  <option value="SET">Ensembles</option>
-                </select>
-              </div>
-
-              <div className="grid gap-2">
-                <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
-                  Taille
-                </label>
-                <select
-                  name="size"
-                  defaultValue={size ?? ""}
-                  className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
-                >
-                  <option value="">Toutes</option>
-                  {sizes.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="grid gap-2">
-                <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
-                  Couleur
-                </label>
-                <select
-                  name="color"
-                  defaultValue={color ?? ""}
-                  className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
-                >
-                  <option value="">Toutes</option>
-                  {colors.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="grid gap-2">
-                  <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
-                    Prix min
-                  </label>
-                <input
-                  name="min"
-                  inputMode="numeric"
-                  placeholder="30000"
-                  defaultValue={typeof minPrice === "number" ? String(minPrice) : ""}
-                  className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg placeholder:text-fg/40 transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
-                />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
-                  Prix max
-                </label>
-                <input
-                  name="max"
-                  inputMode="numeric"
-                  placeholder="60000"
-                  defaultValue={typeof maxPrice === "number" ? String(maxPrice) : ""}
-                  className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg placeholder:text-fg/40 transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
-                />
-              </div>
-            </div>
-
-              <button className="mt-1 h-11 rounded-xl border border-border bg-fg text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90 focus:outline-none focus:ring-2 focus:ring-accent/30">
-                Appliquer
-              </button>
-            </form>
+            <div className="mt-6">{filtersForm}</div>
           </aside>
 
         <section>
@@ -262,7 +272,7 @@ export default async function ShopPage({
               Aucun produit ne correspond à ces filtres.
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
               {products.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

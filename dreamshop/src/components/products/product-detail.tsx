@@ -93,7 +93,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   }
 
   return (
-    <div className="py-12 md:py-16">
+    <div className="py-10 md:py-16">
       <Container>
         <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/60">
           <Link href="/shop" className="hover:text-fg">
@@ -102,7 +102,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
           / {product.category === "HOODIE" ? "Pieces" : "Ensembles"}
         </div>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.25fr_0.9fr]">
+        <div className="mt-6 grid gap-8 md:mt-10 md:gap-10 lg:grid-cols-[1.25fr_0.9fr]">
           <section>
             <div className="relative overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border/50">
               <div className="relative aspect-[4/5] w-full">
@@ -122,7 +122,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             </div>
 
             {sortedImages.length > 1 ? (
-              <div className="mt-4 grid grid-cols-5 gap-3 sm:grid-cols-6">
+              <div className="mt-3 grid grid-cols-4 gap-2 sm:mt-4 sm:grid-cols-6 sm:gap-3">
                 {sortedImages.map((img) => (
                   <button
                     key={img.id}
@@ -152,17 +152,17 @@ export function ProductDetail({ product }: ProductDetailProps) {
           </section>
 
           <section className="h-fit lg:sticky lg:top-24">
-            <h1 className="text-4xl font-black tracking-tight text-fg md:text-5xl">
+            <h1 className="text-3xl font-black tracking-tight text-fg sm:text-4xl md:text-5xl">
               {product.name}
             </h1>
             <div className="mt-3 text-xs font-black uppercase tracking-[0.22em] text-fg/60">
               {formatMoney(product.priceCents)} • Stock par taille
             </div>
-            <p className="mt-6 text-base leading-relaxed text-fg/70">
+            <p className="mt-5 text-sm leading-relaxed text-fg/70 sm:text-base">
               {product.description}
             </p>
 
-            <div className="mt-10 grid gap-7 rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/50">
+            <div className="mt-6 grid gap-6 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/50 sm:mt-8 sm:gap-7 sm:p-6 md:mt-10">
               <div>
                 <div className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
                   Couleur
@@ -176,7 +176,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                         type="button"
                         onClick={() => setVariantId(v.id)}
                         className={cn(
-                          "inline-flex items-center gap-2 rounded-xl border px-4 py-2 text-sm font-bold transition",
+                          "inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-xs font-bold transition sm:px-4 sm:text-sm",
                           selected
                             ? "border-fg bg-fg text-bg"
                             : "border-border bg-transparent text-fg/80 hover:bg-muted"
@@ -212,7 +212,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                         disabled={!available}
                         onClick={() => setSize(s.size)}
                         className={cn(
-                          "rounded-xl border px-4 py-2 text-sm font-bold transition",
+                          "rounded-xl border px-3 py-2 text-xs font-bold transition sm:px-4 sm:text-sm",
                           selected
                             ? "border-fg bg-fg text-bg"
                             : "border-border bg-transparent text-fg/80 hover:bg-muted",

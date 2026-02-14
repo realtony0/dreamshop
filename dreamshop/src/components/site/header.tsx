@@ -83,11 +83,11 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/45 bg-card/95 shadow-sm backdrop-blur-md">
-      <Container className="flex h-20 items-center justify-between">
+      <Container className="flex h-16 items-center justify-between md:h-20">
         <div className="flex flex-1 items-center">
           <Link
             href="/"
-            className="text-2xl font-black uppercase tracking-tight text-fg transition-colors hover:text-accent"
+            className="text-xl font-black uppercase tracking-tight text-fg transition-colors hover:text-accent md:text-2xl"
           >
             Dreamshop
           </Link>
@@ -124,7 +124,7 @@ export function Header() {
       {open ? (
         <div className="lg:hidden">
           <div className="fixed inset-0 z-40 bg-black/30" onClick={() => setOpen(false)} />
-          <div className="fixed inset-x-0 top-20 z-50 border-t border-border bg-card/95 backdrop-blur-md">
+          <div className="fixed inset-x-0 top-16 z-50 border-t border-border bg-card/95 backdrop-blur-md md:top-20">
             <Container className="py-6">
               <div className="grid gap-2">
                 {navItems.map((item) => (
