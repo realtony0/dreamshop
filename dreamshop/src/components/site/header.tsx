@@ -1,9 +1,8 @@
 "use client";
 
-import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Store } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { CartLink } from "@/components/cart/cart-link";
 import { Container } from "@/components/site/container";
@@ -68,22 +67,27 @@ function DesktopNavLink({
 
 export function Header() {
   const pathname = usePathname();
-  const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
-
-  React.useEffect(() => {
-    document.documentElement.style.overflow = open ? "hidden" : "";
-    return () => {
-      document.documentElement.style.overflow = "";
-    };
-  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/45 bg-card/95 shadow-sm backdrop-blur-md">
-      <Container className="flex h-16 items-center justify-between md:h-20">
+      <Container className="flex h-14 items-center justify-between lg:hidden">
+        <Link
+          href="/shop"
+          className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border px-3 text-[11px] font-black uppercase tracking-[0.18em] text-fg/75 transition-colors hover:text-fg"
+        >
+          <Store className="h-4 w-4" />
+          Shop
+        </Link>
+        <Link
+          href="/"
+          className="text-lg font-black uppercase tracking-tight text-fg transition-colors hover:text-accent"
+        >
+          Dreamshop
+        </Link>
+        <CartLink className="border border-border text-fg hover:text-accent" />
+      </Container>
+
+      <Container className="hidden h-20 items-center justify-between lg:flex">
         <div className="flex flex-1 items-center">
           <Link
             href="/"
@@ -107,46 +111,10 @@ export function Header() {
           </div>
         </nav>
 
-        <div className="flex flex-1 items-center justify-end gap-3">
+        <div className="flex flex-1 items-center justify-end">
           <CartLink className="text-fg hover:text-accent" />
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border text-fg transition-colors hover:text-accent lg:hidden"
-            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={open}
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
       </Container>
-
-      {open ? (
-        <div className="lg:hidden">
-          <div className="fixed inset-0 z-40 bg-black/30" onClick={() => setOpen(false)} />
-          <div className="fixed inset-x-0 top-16 z-50 border-t border-border bg-card/95 backdrop-blur-md md:top-20">
-            <Container className="py-6">
-              <div className="grid gap-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "rounded-2xl px-4 py-3 text-sm font-black uppercase tracking-wider transition-colors",
-                      item.isActive(pathname)
-                        ? "bg-fg text-bg"
-                        : "text-fg/80 hover:bg-muted hover:text-fg"
-                    )}
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </Container>
-          </div>
-        </div>
-      ) : null}
     </header>
   );
 }
