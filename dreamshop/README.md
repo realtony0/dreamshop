@@ -60,7 +60,38 @@ Identifiants (par défaut si non définis) :
 
 Recommandé : créer un `.env.local` à partir de `.env.example`.
 
+## Deploiement Vercel
+
+Pour la prod, n’utilise pas `file:./dev.db` (SQLite local). Utilise une DB libSQL distante (Turso).
+
+1) Variables d’environnement Vercel (Project Settings -> Environment Variables)
+
+- `DATABASE_URL=libsql://<ta-db>.turso.io`
+- `TURSO_AUTH_TOKEN=<ton-token>` (ou `DATABASE_AUTH_TOKEN`)
+- `ADMIN_CODE=1508` (ou ton nouveau code)
+- `ADMIN_SESSION_SECRET=<long-secret-random>`
+- `ADMIN_EMAIL=<ton-email-admin>`
+- `NEXT_PUBLIC_DEFAULT_THEME=white`
+
+2) Initialiser le schema sur la DB distante (une fois)
+
+```bash
+DATABASE_URL="libsql://<ta-db>.turso.io" TURSO_AUTH_TOKEN="<ton-token>" npm run db:push
+```
+
+3) (Optionnel) Importer / seed les produits sur la DB distante
+
+```bash
+DATABASE_URL="libsql://<ta-db>.turso.io" TURSO_AUTH_TOKEN="<ton-token>" npm run photos:import
+```
+
+4) Lancer le deploy sur Vercel
+
+- Framework: `Next.js` (auto)
+- Build command: `npm run build` (auto)
+- Output: `.next` (auto)
+
 ## Thèmes / palettes
 
 Palette changeable via le sélecteur en footer.
-Thème par défaut via `NEXT_PUBLIC_DEFAULT_THEME` (mono | sand | slate | white), et variables CSS dans `src/app/globals.css`.
+Thème par défaut via `NEXT_PUBLIC_DEFAULT_THEME` (crock | mono | sand | slate | white), et variables CSS dans `src/app/globals.css`.

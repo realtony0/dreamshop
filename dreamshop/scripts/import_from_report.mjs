@@ -29,6 +29,8 @@ const report = JSON.parse(raw);
 
 const adapter = new PrismaLibSql({
   url: process.env.DATABASE_URL ?? "file:./dev.db",
+  authToken:
+    process.env.DATABASE_AUTH_TOKEN ?? process.env.TURSO_AUTH_TOKEN ?? undefined,
 });
 const prisma = new PrismaClient({ adapter });
 
