@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { defaultTheme } from "@/lib/themes";
 
@@ -17,6 +18,32 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Dreamshop — Streetwear premium",
   description: "Pieces et ensembles premium. Minimal. Visuel. Street.",
+  applicationName: "Dreamshop",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Dreamshop",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  other: {
+    "mobile-web-app-capable": "yes",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#052659",
 };
 
 export default function RootLayout({
@@ -34,7 +61,10 @@ export default function RootLayout({
       <head>
         <ThemeScript />
       </head>
-      <body className="font-[var(--font-inter)]">{children}</body>
+      <body className="font-[var(--font-inter)]">
+        {children}
+        <ServiceWorkerRegister />
+      </body>
     </html>
   );
 }
