@@ -35,7 +35,7 @@ export default async function CheckoutSuccessPage({
           </p>
 
           <div className="mt-8 grid gap-3 border-t border-border pt-6 text-sm text-fg/75">
-            {order.items.map((i) => (
+            {order.items.map((i: (typeof order.items)[number]) => (
               <div key={i.id} className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <div className="truncate text-sm font-bold text-fg">
