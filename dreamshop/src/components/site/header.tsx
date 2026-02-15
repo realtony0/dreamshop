@@ -62,7 +62,13 @@ export function Header({
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/45 bg-card/95 shadow-sm backdrop-blur-md">
+    <header
+      className="sticky top-0 z-50 border-b border-border/60 shadow-sm backdrop-blur-md"
+      style={{
+        background:
+          "linear-gradient(180deg, rgb(var(--ds-muted) / 0.92), rgb(var(--ds-card) / 0.94))",
+      }}
+    >
       <Container className="flex h-14 items-center justify-between lg:hidden">
         <Link
           href="/shop"

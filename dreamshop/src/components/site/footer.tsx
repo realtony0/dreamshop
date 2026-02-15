@@ -17,7 +17,13 @@ export function Footer({
   links: FooterLink[];
 }) {
   return (
-    <footer className="border-t border-border/45 bg-card text-fg">
+    <footer
+      className="border-t border-border/60 text-fg"
+      style={{
+        background:
+          "linear-gradient(0deg, rgb(var(--ds-muted) / 0.78), rgb(var(--ds-card) / 0.96))",
+      }}
+    >
       <Container className="grid gap-8 py-12 pb-28 md:grid-cols-3 md:items-start md:py-14 md:pb-14">
         <div className="space-y-3">
           <div className="text-sm font-black uppercase tracking-tight">

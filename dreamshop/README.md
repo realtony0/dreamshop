@@ -72,6 +72,7 @@ Pour la prod, n’utilise pas `file:./dev.db` (SQLite local). Utilise une DB lib
 - `ADMIN_SESSION_SECRET=<long-secret-random>`
 - `ADMIN_EMAIL=<ton-email-admin>`
 - `NEXT_PUBLIC_DEFAULT_THEME=white`
+- `NEXT_PUBLIC_ENABLE_PWA=0` (mettre `1` seulement si tu veux activer le service worker)
 
 2) Initialiser le schema sur la DB distante (une fois)
 
