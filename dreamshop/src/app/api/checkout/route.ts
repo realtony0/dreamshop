@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { buildWhatsAppOrderUrl } from "@/lib/whatsapp";
+import { getCheckoutSettings } from "@/lib/site-settings";
 
 const emailSchema = z
   .string()
@@ -80,7 +81,9 @@ export async function POST(req: Request) {
   const normalizedPhone = phone.trim();
   const normalizedAddress2 = address2.trim();
   const normalizedPostalCode = postalCode.trim() || "00000";
-  const normalizedCountry = parsed.data.country.trim() || "Sénégal";
+  const checkoutSettings = await getCheckoutSettings();
+  const normalizedCountry =
+    parsed.data.country.trim() || checkoutSettings.baseCountry || "Sénégal";
   const resolvedEmail = parsed.data.email.trim() || fallbackEmail(normalizedPhone);
 
   const fullName =

@@ -84,6 +84,13 @@ model OrderItem {
   unitPriceCents Int
 }
 
+model SiteSetting {
+  key       String   @id
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 enum OrderStatus {
   PENDING
   PAID

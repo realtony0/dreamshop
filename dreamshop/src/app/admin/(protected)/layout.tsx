@@ -29,6 +29,9 @@ export default async function AdminProtectedLayout({
           </div>
 
           <div className="flex items-center gap-2">
+            <Link href="/admin/site" className={navLink}>
+              Site
+            </Link>
             <Link href="/admin/products" className={navLink}>
               Produits
             </Link>

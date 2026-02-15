@@ -77,6 +77,28 @@ export default async function AdminDashboardPage() {
         <div className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/50">
           <div className="flex items-center justify-between gap-4">
             <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/70">
+              Sections du site
+            </div>
+            <Link href="/admin/site" className="text-xs uppercase tracking-[0.22em] text-fg/60 hover:text-fg">
+              Ouvrir
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-2 text-sm">
+            <Link href="/admin/site/home" className="rounded-xl border border-border bg-bg px-4 py-3 text-fg/80 hover:bg-muted">
+              Accueil
+            </Link>
+            <Link href="/admin/site/navigation" className="rounded-xl border border-border bg-bg px-4 py-3 text-fg/80 hover:bg-muted">
+              Navigation et footer
+            </Link>
+            <Link href="/admin/site/checkout" className="rounded-xl border border-border bg-bg px-4 py-3 text-fg/80 hover:bg-muted">
+              Formulaire de commande
+            </Link>
+          </div>
+        </div>
+
+        <div className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/50">
+          <div className="flex items-center justify-between gap-4">
+            <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/70">
               Dernières commandes
             </div>
             <Link href="/admin/orders" className="text-xs uppercase tracking-[0.22em] text-fg/60 hover:text-fg">

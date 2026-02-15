@@ -13,7 +13,13 @@ type CheckoutResponse =
   | { ok: true; orderId: string; whatsappUrl: string }
   | { ok: false; error: string };
 
-export function CheckoutPage() {
+export function CheckoutPage({
+  defaultCountry,
+  checkoutNote,
+}: {
+  defaultCountry: string;
+  checkoutNote: string;
+}) {
   const router = useRouter();
   const { items, subtotalCents, clear } = useCart();
   const [pending, setPending] = React.useState(false);
@@ -31,7 +37,7 @@ export function CheckoutPage() {
       phone: String(form.get("phone") ?? ""),
       address1: String(form.get("address1") ?? ""),
       city: String(form.get("city") ?? ""),
-      country: String(form.get("country") ?? "Sénégal"),
+      country: String(form.get("country") ?? defaultCountry),
       items: items.map((i) => ({
         variantId: i.variantId,
         size: i.size,
@@ -78,7 +84,7 @@ export function CheckoutPage() {
               Formulaire rapide
             </h1>
             <div className="mt-2 text-sm text-fg/65">
-              Base au Sénégal, livraison internationale.
+              {checkoutNote}
             </div>
           </div>
           <Link
@@ -126,7 +132,7 @@ export function CheckoutPage() {
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="country">Pays</Label>
-                    <Input id="country" name="country" defaultValue="Sénégal" required />
+                    <Input id="country" name="country" defaultValue={defaultCountry} required />
                   </div>
                 </div>
 

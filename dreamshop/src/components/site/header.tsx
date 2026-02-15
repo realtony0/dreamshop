@@ -7,38 +7,10 @@ import { cn } from "@/lib/cn";
 import { CartLink } from "@/components/cart/cart-link";
 import { Container } from "@/components/site/container";
 
-type NavItem = {
+type HeaderLink = {
   label: string;
   href: string;
-  isActive: (pathname: string) => boolean;
 };
-
-const navItems: NavItem[] = [
-  {
-    label: "Accueil",
-    href: "/",
-    isActive: (pathname) => pathname === "/",
-  },
-  {
-    label: "Boutique",
-    href: "/shop",
-    isActive: (pathname) =>
-      pathname === "/shop" ||
-      pathname.startsWith("/products/") ||
-      pathname === "/cart" ||
-      pathname.startsWith("/checkout"),
-  },
-  {
-    label: "Pieces",
-    href: "/shop?category=HOODIE",
-    isActive: () => false,
-  },
-  {
-    label: "Ensembles",
-    href: "/shop?category=SET",
-    isActive: () => false,
-  },
-];
 
 function DesktopNavLink({
   href,
@@ -65,7 +37,28 @@ function DesktopNavLink({
   );
 }
 
-export function Header() {
+function isNavActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  if (href.startsWith("/shop?category=")) return pathname === "/shop";
+  if (href === "/shop") {
+    return (
+      pathname === "/shop" ||
+      pathname.startsWith("/products/") ||
+      pathname === "/cart" ||
+      pathname.startsWith("/checkout")
+    );
+  }
+  const base = href.split("?")[0] || href;
+  return pathname === base || pathname.startsWith(`${base}/`);
+}
+
+export function Header({
+  brandName,
+  links,
+}: {
+  brandName: string;
+  links: HeaderLink[];
+}) {
   const pathname = usePathname();
 
   return (
@@ -82,7 +75,7 @@ export function Header() {
           href="/"
           className="text-lg font-black uppercase tracking-tight text-fg transition-colors hover:text-accent"
         >
-          Dreamshop
+          {brandName}
         </Link>
         <CartLink className="border border-border text-fg hover:text-accent" />
       </Container>
@@ -93,17 +86,17 @@ export function Header() {
             href="/"
             className="text-xl font-black uppercase tracking-tight text-fg transition-colors hover:text-accent md:text-2xl"
           >
-            Dreamshop
+            {brandName}
           </Link>
         </div>
 
         <nav className="hidden flex-1 items-center justify-center lg:flex">
           <div className="flex items-center space-x-1">
-            {navItems.map((item) => (
+            {links.map((item) => (
               <DesktopNavLink
                 key={item.href}
                 href={item.href}
-                active={item.isActive(pathname)}
+                active={isNavActive(pathname, item.href)}
               >
                 {item.label}
               </DesktopNavLink>
