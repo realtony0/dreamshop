@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { formatMoney } from "@/lib/money";
 
 type CheckoutResponse =
-  | { ok: true; orderId: string }
+  | { ok: true; orderId: string; whatsappUrl: string }
   | { ok: false; error: string };
 
 export function CheckoutPage() {
@@ -57,6 +57,11 @@ export function CheckoutPage() {
       }
 
       clear();
+      if (typeof window !== "undefined") {
+        window.location.assign(data.whatsappUrl);
+        return;
+      }
+
       router.push(`/checkout/success?orderId=${encodeURIComponent(data.orderId)}`);
     } catch {
       setError("Erreur réseau. Réessaie.");
@@ -155,11 +160,11 @@ export function CheckoutPage() {
                   disabled={pending}
                   className="h-12 w-full rounded-xl border border-border bg-fg text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {pending ? "Commande..." : "Valider la commande"}
+                  {pending ? "Redirection WhatsApp..." : "Commander via WhatsApp"}
                 </button>
 
                 <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/45">
-                  Mode démo — aucune transaction bancaire
+                  La commande sera envoyee sur WhatsApp
                 </div>
               </div>
             </form>

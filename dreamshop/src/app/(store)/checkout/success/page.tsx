@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { formatMoney } from "@/lib/money";
 import { Container } from "@/components/site/container";
+import { buildWhatsAppOrderUrl } from "@/lib/whatsapp";
 
 export default async function CheckoutSuccessPage({
   searchParams,
@@ -19,6 +20,27 @@ export default async function CheckoutSuccessPage({
   });
   if (!order) notFound();
 
+  const whatsappUrl = buildWhatsAppOrderUrl({
+    orderId: order.id,
+    firstName: order.firstName,
+    lastName: order.lastName,
+    email: order.email,
+    phone: order.phone,
+    address1: order.address1,
+    address2: order.address2,
+    postalCode: order.postalCode,
+    city: order.city,
+    country: order.country,
+    totalCents: order.totalCents,
+    items: order.items.map((item) => ({
+      productName: item.productName,
+      colorName: item.colorName,
+      size: item.size,
+      quantity: item.quantity,
+      unitPriceCents: item.unitPriceCents,
+    })),
+  });
+
   return (
     <div className="py-12 md:py-16">
       <Container className="max-w-3xl">
@@ -30,7 +52,7 @@ export default async function CheckoutSuccessPage({
             Merci {order.firstName}.
           </h1>
           <p className="mt-4 text-base text-fg/70">
-            (Démo) Une confirmation serait envoyée à{" "}
+            Confirmation enregistree pour{" "}
             <span className="font-bold text-fg">{order.email}</span>.
           </p>
 
@@ -61,8 +83,14 @@ export default async function CheckoutSuccessPage({
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Link
-              href="/shop"
+              href={whatsappUrl}
               className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-fg px-6 text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90"
+            >
+              Ouvrir WhatsApp
+            </Link>
+            <Link
+              href="/shop"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-transparent px-6 text-sm font-black uppercase tracking-wider text-fg transition hover:bg-muted"
             >
               Retour boutique
             </Link>

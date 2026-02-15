@@ -30,13 +30,25 @@ export type AdminCatalogProduct = {
 };
 
 type CategoryFilter = "ALL" | "HOODIE" | "SET";
+type StockFilter = "ALL" | "IN_STOCK" | "LOW" | "OUT";
 
 const lowStockThreshold = 3;
 
-function stockLabel(quantity: number) {
-  if (quantity === 0) return "Rupture";
-  if (quantity <= lowStockThreshold) return "Stock faible";
-  return `Stock ${quantity}`;
+function categoryLabel(category: "HOODIE" | "SET") {
+  return category === "HOODIE" ? "Piece" : "Ensemble";
+}
+
+function stockState(totalStock: number): StockFilter {
+  if (totalStock === 0) return "OUT";
+  if (totalStock <= lowStockThreshold) return "LOW";
+  return "IN_STOCK";
+}
+
+function stockLabel(totalStock: number) {
+  const state = stockState(totalStock);
+  if (state === "OUT") return "Rupture";
+  if (state === "LOW") return `Stock faible (${totalStock})`;
+  return `En stock (${totalStock})`;
 }
 
 export function AdminProductsCatalog({
@@ -46,113 +58,208 @@ export function AdminProductsCatalog({
 }) {
   const [query, setQuery] = React.useState("");
   const [category, setCategory] = React.useState<CategoryFilter>("ALL");
-  const [onlyLowStock, setOnlyLowStock] = React.useState(false);
-  const [openProductId, setOpenProductId] = React.useState<string | null>(null);
+  const [stockFilter, setStockFilter] = React.useState<StockFilter>("ALL");
 
   const filtered = React.useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const value = query.trim().toLowerCase();
+
     return products.filter((product) => {
       if (category !== "ALL" && product.category !== category) return false;
-      if (onlyLowStock && product.totalStock > lowStockThreshold) return false;
+      if (stockFilter !== "ALL" && stockState(product.totalStock) !== stockFilter) return false;
 
-      if (!q) return true;
-      const inProduct =
-        product.name.toLowerCase().includes(q) || product.slug.toLowerCase().includes(q);
-      if (inProduct) return true;
+      if (!value) return true;
+
+      const inTitle =
+        product.name.toLowerCase().includes(value) || product.slug.toLowerCase().includes(value);
+      if (inTitle) return true;
+
       return product.variants.some((variant) =>
-        variant.colorName.toLowerCase().includes(q)
+        variant.colorName.toLowerCase().includes(value)
       );
     });
-  }, [category, onlyLowStock, products, query]);
+  }, [category, products, query, stockFilter]);
 
   return (
     <div className="grid gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-5">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <div className="text-xs font-black uppercase tracking-[0.28em] text-fg/55">
+          <div className="text-xs font-black uppercase tracking-[0.24em] text-fg/55">
+            Boutique admin
+          </div>
+          <h1 className="mt-2 text-3xl font-black tracking-tight text-fg md:text-4xl">
             Produits
-          </div>
-          <h1 className="mt-3 text-4xl font-black tracking-tight text-fg md:text-5xl">
-            Catalogue simple
           </h1>
-          <div className="mt-2 text-sm text-fg/65">
-            Vue compacte. Clique sur Details seulement si nécessaire.
-          </div>
+          <p className="mt-2 text-sm text-fg/65">
+            Ecran simplifie: chercher, filtrer, editer.
+          </p>
         </div>
-        <Link
-          href="/admin/products/new"
-          className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-fg px-5 text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90"
-        >
-          Nouveau produit
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-bg px-4 text-xs font-black uppercase tracking-[0.16em] text-fg transition hover:bg-muted"
+          >
+            Voir boutique
+          </Link>
+          <Link
+            href="/admin/products/new"
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-fg px-4 text-xs font-black uppercase tracking-[0.16em] text-bg transition hover:bg-fg/90"
+          >
+            Ajouter produit
+          </Link>
+        </div>
       </div>
 
-      <section className="grid gap-3 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/50 md:grid-cols-[1fr_auto_auto] md:items-end">
+      <div className="grid gap-3 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/50 md:grid-cols-[1fr_200px_200px_auto] md:items-end">
         <div className="grid gap-2">
           <label
-            htmlFor="catalog-search"
-            className="text-xs font-black uppercase tracking-[0.18em] text-fg/55"
+            htmlFor="admin-product-search"
+            className="text-xs font-black uppercase tracking-[0.16em] text-fg/55"
           >
             Recherche
           </label>
           <input
-            id="catalog-search"
+            id="admin-product-search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Nom, slug, couleur..."
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Nom, slug, couleur"
             className="h-11 rounded-xl border border-border bg-bg px-4 text-sm text-fg outline-none transition focus:ring-2 focus:ring-accent/35"
           />
         </div>
 
         <div className="grid gap-2">
           <label
-            htmlFor="catalog-category"
-            className="text-xs font-black uppercase tracking-[0.18em] text-fg/55"
+            htmlFor="admin-product-category"
+            className="text-xs font-black uppercase tracking-[0.16em] text-fg/55"
           >
-            Catégorie
+            Type
           </label>
           <select
-            id="catalog-category"
+            id="admin-product-category"
             value={category}
-            onChange={(e) => setCategory(e.target.value as CategoryFilter)}
+            onChange={(event) => setCategory(event.target.value as CategoryFilter)}
             className="h-11 rounded-xl border border-border bg-bg px-4 text-sm text-fg outline-none transition focus:ring-2 focus:ring-accent/35"
           >
-            <option value="ALL">Toutes</option>
+            <option value="ALL">Tous</option>
             <option value="HOODIE">Pieces</option>
             <option value="SET">Ensembles</option>
           </select>
         </div>
 
-        <button
-          onClick={() => setOnlyLowStock((v) => !v)}
-          className={cn(
-            "h-11 rounded-xl border px-4 text-xs font-black uppercase tracking-[0.18em] transition",
-            onlyLowStock
-              ? "border-fg bg-fg text-bg"
-              : "border-border bg-bg text-fg hover:bg-muted"
-          )}
-        >
-          Stock faible
-        </button>
-      </section>
+        <div className="grid gap-2">
+          <label
+            htmlFor="admin-product-stock"
+            className="text-xs font-black uppercase tracking-[0.16em] text-fg/55"
+          >
+            Stock
+          </label>
+          <select
+            id="admin-product-stock"
+            value={stockFilter}
+            onChange={(event) => setStockFilter(event.target.value as StockFilter)}
+            className="h-11 rounded-xl border border-border bg-bg px-4 text-sm text-fg outline-none transition focus:ring-2 focus:ring-accent/35"
+          >
+            <option value="ALL">Tous</option>
+            <option value="IN_STOCK">En stock</option>
+            <option value="LOW">Stock faible</option>
+            <option value="OUT">Rupture</option>
+          </select>
+        </div>
+
+        <div className="pb-1 text-right text-xs font-black uppercase tracking-[0.16em] text-fg/60">
+          {filtered.length} produit{filtered.length > 1 ? "s" : ""}
+        </div>
+      </div>
 
       {filtered.length === 0 ? (
         <div className="rounded-2xl bg-card p-8 text-sm text-fg/65 shadow-sm ring-1 ring-border/50">
           Aucun produit pour ce filtre.
         </div>
       ) : (
-        <div className="grid gap-3">
-          {filtered.map((product) => {
-            const isOpen = openProductId === product.id;
-            const colorPreview = product.variants.slice(0, 6);
+        <>
+          <div className="hidden overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border/50 md:block">
+            <div className="grid grid-cols-[2fr_0.8fr_0.9fr_1fr_0.9fr_0.8fr] gap-4 border-b border-border px-5 py-3 text-[11px] font-black uppercase tracking-[0.16em] text-fg/55">
+              <div>Produit</div>
+              <div>Type</div>
+              <div>Prix</div>
+              <div>Stock</div>
+              <div>Etat</div>
+              <div className="text-right">Action</div>
+            </div>
 
-            return (
+            <div className="divide-y divide-border">
+              {filtered.map((product) => (
+                <div
+                  key={product.id}
+                  className="grid grid-cols-[2fr_0.8fr_0.9fr_1fr_0.9fr_0.8fr] items-center gap-4 px-5 py-3 text-sm"
+                >
+                  <div className="flex min-w-0 items-center gap-3">
+                    <div className="relative h-12 w-12 overflow-hidden rounded-lg border border-border bg-muted">
+                      {product.coverImage ? (
+                        <Image
+                          src={product.coverImage}
+                          alt={product.name}
+                          fill
+                          sizes="48px"
+                          className="object-cover"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="min-w-0">
+                      <div className="truncate font-semibold text-fg">{product.name}</div>
+                      <div className="truncate text-xs uppercase tracking-[0.14em] text-fg/50">
+                        {product.slug} • {product.imageCount} photo
+                        {product.imageCount > 1 ? "s" : ""}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="text-xs font-black uppercase tracking-[0.14em] text-fg/65">
+                    {categoryLabel(product.category)}
+                  </div>
+
+                  <div className="text-xs font-black uppercase tracking-[0.14em] text-fg/65">
+                    {formatMoney(product.priceCents)}
+                  </div>
+
+                  <div className="text-xs font-black uppercase tracking-[0.14em] text-fg/65">
+                    {stockLabel(product.totalStock)}
+                  </div>
+
+                  <div>
+                    <span
+                      className={cn(
+                        "inline-flex rounded-full border px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.14em]",
+                        product.active
+                          ? "border-border bg-bg text-fg/80"
+                          : "border-border bg-bg text-fg/45"
+                      )}
+                    >
+                      {product.active ? "Actif" : "Cache"}
+                    </span>
+                  </div>
+
+                  <div className="text-right">
+                    <Link
+                      href={`/admin/products/${product.id}/edit`}
+                      className="inline-flex h-9 items-center justify-center rounded-lg border border-border bg-bg px-3 text-[11px] font-black uppercase tracking-[0.14em] text-fg transition hover:bg-muted"
+                    >
+                      Editer
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-3 md:hidden">
+            {filtered.map((product) => (
               <article
                 key={product.id}
                 className="rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/50"
               >
-                <div className="grid grid-cols-[56px_1fr] gap-3 md:grid-cols-[56px_1fr_auto]">
-                  <div className="relative h-14 w-14 overflow-hidden rounded-xl bg-muted">
+                <div className="flex items-start gap-3">
+                  <div className="relative h-14 w-14 overflow-hidden rounded-lg border border-border bg-muted">
                     {product.coverImage ? (
                       <Image
                         src={product.coverImage}
@@ -161,129 +268,35 @@ export function AdminProductsCatalog({
                         sizes="56px"
                         className="object-cover"
                       />
-                    ) : (
-                      <div className="flex h-full items-center justify-center text-[10px] font-black uppercase tracking-[0.15em] text-fg/45">
-                        No photo
-                      </div>
-                    )}
+                    ) : null}
                   </div>
 
-                  <div className="min-w-0">
-                    <div className="truncate text-lg font-black text-fg">{product.name}</div>
-
-                    <div className="mt-3 flex flex-wrap items-center gap-2">
-                      <span className="inline-flex rounded-full border border-border bg-bg px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-fg/70">
-                        {product.category === "HOODIE" ? "Piece" : "Ensemble"}
-                      </span>
-                      <span className="inline-flex rounded-full border border-border bg-bg px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-fg/70">
-                        {product.active ? "Actif" : "Off"}
-                      </span>
-                      <span className="inline-flex rounded-full border border-border bg-bg px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.14em] text-fg/70">
-                        {stockLabel(product.totalStock)}
-                      </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-base font-black text-fg">{product.name}</div>
+                    <div className="mt-1 text-xs uppercase tracking-[0.14em] text-fg/55">
+                      {categoryLabel(product.category)} • {formatMoney(product.priceCents)}
                     </div>
-
-                    <div className="mt-3 flex items-center gap-2">
-                      {colorPreview.map((variant) => (
-                        <span
-                        key={variant.id}
-                        className="h-4 w-4 rounded-full border border-fg/20"
-                        style={{ backgroundColor: variant.colorHex ?? "#0a0a0a" }}
-                        title={variant.colorName}
-                      />
-                      ))}
-                      {product.variants.length > colorPreview.length ? (
-                        <span className="text-[11px] font-black uppercase tracking-[0.14em] text-fg/45">
-                          +{product.variants.length - colorPreview.length}
-                        </span>
-                      ) : null}
-                      <span className="text-[11px] font-black uppercase tracking-[0.14em] text-fg/45">
-                        {product.imageCount} photo{product.imageCount > 1 ? "s" : ""}
-                      </span>
-                    </div>
-                  </div>
-
-                    <div className="col-span-2 flex items-center justify-between gap-2 pt-2 md:col-span-1 md:flex-col md:items-end md:justify-start md:pt-0">
-                    <div className="text-sm font-black uppercase tracking-[0.14em] text-fg/75">
-                      {formatMoney(product.priceCents)}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          setOpenProductId((current) =>
-                            current === product.id ? null : product.id
-                          )
-                        }
-                        className="h-9 rounded-xl border border-border bg-bg px-3 text-[11px] font-black uppercase tracking-[0.16em] text-fg transition hover:bg-muted"
-                      >
-                        {isOpen ? "Masquer" : "Details"}
-                      </button>
-                      <Link
-                        href={`/admin/products/${product.id}/edit`}
-                        className="inline-flex h-9 items-center rounded-xl border border-border bg-fg px-3 text-[11px] font-black uppercase tracking-[0.16em] text-bg transition hover:bg-fg/90"
-                      >
-                        Editer
-                      </Link>
+                    <div className="mt-1 text-xs uppercase tracking-[0.14em] text-fg/55">
+                      {stockLabel(product.totalStock)} • {product.active ? "Actif" : "Cache"}
                     </div>
                   </div>
                 </div>
 
-                {isOpen ? (
-                  <div className="mt-4 grid gap-2 border-t border-border/70 pt-4">
-                    {product.variants.map((variant) => (
-                      <div
-                        key={variant.id}
-                        className="grid gap-2 rounded-xl border border-border bg-bg p-3 md:grid-cols-[1fr_auto]"
-                      >
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span
-                              className="h-3.5 w-3.5 rounded-full border border-fg/20"
-                              style={{ backgroundColor: variant.colorHex ?? "#0a0a0a" }}
-                            />
-                            <span className="text-xs font-black uppercase tracking-[0.16em] text-fg/75">
-                              {variant.colorName}
-                            </span>
-                            <span className="text-[11px] uppercase tracking-[0.14em] text-fg/45">
-                              Stock {variant.totalStock}
-                            </span>
-                          </div>
-                          <div className="mt-1 text-[11px] uppercase tracking-[0.13em] text-fg/45">
-                            {variant.stock
-                              .map((item) => `${item.size}:${item.quantity}`)
-                              .join(" • ")}
-                          </div>
-                        </div>
-
-                        <div className="flex items-center gap-1.5">
-                          {variant.images.slice(0, 5).map((url, index) => (
-                            <div
-                              key={`${variant.id}-${url}-${index}`}
-                              className="relative h-6 w-6 overflow-hidden rounded-md bg-muted"
-                            >
-                              <Image
-                                src={url}
-                                alt={variant.colorName}
-                                fill
-                                sizes="24px"
-                                className="object-cover"
-                              />
-                            </div>
-                          ))}
-                          {variant.images.length > 5 ? (
-                            <span className="text-[11px] font-black uppercase tracking-[0.12em] text-fg/45">
-                              +{variant.images.length - 5}
-                            </span>
-                          ) : null}
-                        </div>
-                      </div>
-                    ))}
+                <div className="mt-3 flex items-center justify-between">
+                  <div className="text-[11px] uppercase tracking-[0.14em] text-fg/45">
+                    {product.imageCount} photo{product.imageCount > 1 ? "s" : ""}
                   </div>
-                ) : null}
+                  <Link
+                    href={`/admin/products/${product.id}/edit`}
+                    className="inline-flex h-9 items-center justify-center rounded-lg border border-border bg-bg px-3 text-[11px] font-black uppercase tracking-[0.14em] text-fg transition hover:bg-muted"
+                  >
+                    Editer
+                  </Link>
+                </div>
               </article>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

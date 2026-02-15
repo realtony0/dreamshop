@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { buildWhatsAppOrderUrl } from "@/lib/whatsapp";
 
 const bodySchema = z.object({
   email: z.string().email(),
@@ -124,11 +125,38 @@ export async function POST(req: Request) {
           totalCents,
           items: { create: orderItems },
         },
-        select: { id: true },
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          email: true,
+          phone: true,
+          address1: true,
+          address2: true,
+          postalCode: true,
+          city: true,
+          country: true,
+          totalCents: true,
+        },
       });
     });
 
-    return NextResponse.json({ ok: true, orderId: order.id });
+    const whatsappUrl = buildWhatsAppOrderUrl({
+      orderId: order.id,
+      firstName: order.firstName,
+      lastName: order.lastName,
+      email: order.email,
+      phone: order.phone,
+      address1: order.address1,
+      address2: order.address2,
+      postalCode: order.postalCode,
+      city: order.city,
+      country: order.country,
+      totalCents: order.totalCents,
+      items: orderItems,
+    });
+
+    return NextResponse.json({ ok: true, orderId: order.id, whatsappUrl });
   } catch (err) {
     if (err instanceof Error && err.message === "OUT_OF_STOCK") {
       return NextResponse.json(

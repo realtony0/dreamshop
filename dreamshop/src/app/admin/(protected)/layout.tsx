@@ -5,7 +5,7 @@ import { getAdminSession } from "@/lib/admin-server";
 import { Container } from "@/components/site/container";
 
 const navLink =
-  "text-xs font-medium uppercase tracking-[0.22em] text-white/80 hover:text-white transition";
+  "inline-flex h-10 items-center rounded-lg border border-border bg-bg px-3 text-[11px] font-black uppercase tracking-[0.14em] text-fg/75 transition hover:bg-muted hover:text-fg";
 
 export default async function AdminProtectedLayout({
   children,
@@ -16,36 +16,28 @@ export default async function AdminProtectedLayout({
   if (!session) redirect("/admin/login");
 
   return (
-    <div className="min-h-dvh">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/95 backdrop-blur">
-        <Container className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link
-              href="/admin"
-              className="text-sm font-semibold uppercase tracking-[0.34em] text-white"
-            >
+    <div className="min-h-dvh bg-bg">
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-card/95 backdrop-blur">
+        <Container className="flex flex-wrap items-center justify-between gap-3 py-3">
+          <div className="flex items-center gap-3">
+            <Link href="/admin" className="text-lg font-black tracking-tight text-fg">
               Admin
             </Link>
-            <nav className="hidden items-center gap-7 md:flex">
-              <Link href="/admin" className={navLink}>
-                Dashboard
-              </Link>
-              <Link href="/admin/products" className={navLink}>
-                Produits
-              </Link>
-              <Link href="/admin/orders" className={navLink}>
-                Commandes
-              </Link>
-              <Link href="/" className={navLink}>
-                Boutique
-              </Link>
-            </nav>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden text-xs uppercase tracking-[0.22em] text-white/60 md:block">
+            <div className="rounded-full border border-border bg-bg px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-fg/55">
               {session.email}
             </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link href="/admin/products" className={navLink}>
+              Produits
+            </Link>
+            <Link href="/admin/orders" className={navLink}>
+              Commandes
+            </Link>
+            <Link href="/" className={navLink}>
+              Boutique
+            </Link>
             <Link href="/admin/logout" className={navLink}>
               Logout
             </Link>
