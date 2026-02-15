@@ -3,16 +3,27 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { buildWhatsAppOrderUrl } from "@/lib/whatsapp";
 
+const emailSchema = z
+  .string()
+  .trim()
+  .optional()
+  .default("")
+  .refine(
+    (value) => value.length === 0 || z.string().email().safeParse(value).success,
+    "Email invalide."
+  );
+
 const bodySchema = z.object({
-  email: z.string().email(),
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  phone: z.string().optional().default(""),
+  email: emailSchema,
+  fullName: z.string().trim().optional().default(""),
+  firstName: z.string().trim().optional().default(""),
+  lastName: z.string().trim().optional().default(""),
+  phone: z.string().trim().min(1),
   address1: z.string().min(1),
-  address2: z.string().optional().default(""),
-  postalCode: z.string().min(1),
+  address2: z.string().trim().optional().default(""),
+  postalCode: z.string().trim().optional().default(""),
   city: z.string().min(1),
-  country: z.string().min(1),
+  country: z.string().trim().optional().default("Sénégal"),
   items: z
     .array(
       z.object({
@@ -23,6 +34,28 @@ const bodySchema = z.object({
     )
     .min(1),
 });
+
+function splitNameFromForm(input: string) {
+  const parts = input
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  if (parts.length === 0) {
+    return { firstName: "Client", lastName: "Dreamshop" };
+  }
+  if (parts.length === 1) {
+    return { firstName: parts[0], lastName: "Client" };
+  }
+
+  return { firstName: parts[0], lastName: parts.slice(1).join(" ") };
+}
+
+function fallbackEmail(phone: string) {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return `client-${Date.now()}@dreamshop.shop`;
+  return `client${digits}@dreamshop.shop`;
+}
 
 export async function POST(req: Request) {
   let json: unknown;
@@ -43,7 +76,17 @@ export async function POST(req: Request) {
     );
   }
 
-  const { items, phone, address2, ...customer } = parsed.data;
+  const { items, phone, address2, postalCode } = parsed.data;
+  const normalizedPhone = phone.trim();
+  const normalizedAddress2 = address2.trim();
+  const normalizedPostalCode = postalCode.trim() || "00000";
+  const normalizedCountry = parsed.data.country.trim() || "Sénégal";
+  const resolvedEmail = parsed.data.email.trim() || fallbackEmail(normalizedPhone);
+
+  const fullName =
+    parsed.data.fullName.trim() ||
+    `${parsed.data.firstName.trim()} ${parsed.data.lastName.trim()}`.trim();
+  const resolvedName = splitNameFromForm(fullName);
 
   const variantIds = Array.from(new Set(items.map((i) => i.variantId)));
   const variants = await prisma.productVariant.findMany({
@@ -119,9 +162,15 @@ export async function POST(req: Request) {
 
       return await tx.order.create({
         data: {
-          ...customer,
-          phone: phone || null,
-          address2: address2 || null,
+          email: resolvedEmail,
+          firstName: resolvedName.firstName,
+          lastName: resolvedName.lastName,
+          phone: normalizedPhone || null,
+          address1: parsed.data.address1,
+          address2: normalizedAddress2 || null,
+          postalCode: normalizedPostalCode,
+          city: parsed.data.city,
+          country: normalizedCountry,
           totalCents,
           items: { create: orderItems },
         },

@@ -240,7 +240,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
               </button>
 
               <div className="grid gap-2 text-xs font-black uppercase tracking-[0.22em] text-fg/50">
-                <div>Livraison 48–72h (demo)</div>
+                <div>Livraison 48–72h</div>
                 <div>Retours 14 jours</div>
               </div>
             </div>
