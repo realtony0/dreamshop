@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import {
   adminCookieName,
   createAdminToken,
-  getAdminIdentityEmail,
   getExpectedAdminCode,
 } from "@/lib/auth";
 
@@ -29,8 +28,7 @@ export async function adminLoginAction(
     return { error: "Code incorrect." };
   }
 
-  const email = getAdminIdentityEmail();
-  const token = await createAdminToken({ email });
+  const token = await createAdminToken();
   const cookieStore = await cookies();
   cookieStore.set(adminCookieName, token, {
     httpOnly: true,

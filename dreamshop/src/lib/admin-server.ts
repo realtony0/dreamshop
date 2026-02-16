@@ -8,8 +8,8 @@ export async function getAdminSession() {
   const token = cookieStore.get(adminCookieName)?.value;
   if (!token) return null;
   try {
-    const payload = await verifyAdminToken(token);
-    return { email: payload.email };
+    await verifyAdminToken(token);
+    return { label: "Admin" };
   } catch {
     return null;
   }
@@ -31,4 +31,3 @@ export async function clearAdminSession() {
     maxAge: 0,
   });
 }
-

@@ -24,7 +24,7 @@ export default async function AdminProtectedLayout({
               Admin
             </Link>
             <div className="rounded-full border border-border bg-bg px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-fg/55">
-              {session.email}
+              {session.label}
             </div>
           </div>
 

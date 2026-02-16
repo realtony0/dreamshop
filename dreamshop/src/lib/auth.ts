@@ -3,6 +3,10 @@ import { SignJWT, jwtVerify } from "jose";
 export const adminCookieName = "ds_admin";
 
 const adminSessionDays = 14;
+type AdminTokenPayload = {
+  admin?: true;
+  email?: string;
+};
 
 function getAdminSessionSecret() {
   const secret =
@@ -14,12 +18,8 @@ export function getExpectedAdminCode() {
   return process.env.ADMIN_CODE ?? "1508";
 }
 
-export function getAdminIdentityEmail() {
-  return process.env.ADMIN_EMAIL ?? "admin@dreamshop.local";
-}
-
-export async function createAdminToken(payload: { email: string }) {
-  return await new SignJWT(payload)
+export async function createAdminToken() {
+  return await new SignJWT({ admin: true } satisfies AdminTokenPayload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(`${adminSessionDays}d`)
@@ -27,9 +27,9 @@ export async function createAdminToken(payload: { email: string }) {
 }
 
 export async function verifyAdminToken(token: string) {
-  const { payload } = await jwtVerify<{ email: string }>(
-    token,
-    getAdminSessionSecret()
-  );
+  const { payload } = await jwtVerify<AdminTokenPayload>(token, getAdminSessionSecret());
+  if (!payload.admin && !payload.email) {
+    throw new Error("INVALID_ADMIN_TOKEN");
+  }
   return payload;
 }
