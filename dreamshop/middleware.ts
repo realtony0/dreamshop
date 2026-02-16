@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { adminCookieName, verifyAdminToken } from "./src/lib/auth";
+import { adminCookieName } from "./src/lib/auth";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -8,13 +8,8 @@ export async function middleware(req: NextRequest) {
 
   const token = req.cookies.get(adminCookieName)?.value;
   if (!token) return handleUnauthorized(req);
-
-  try {
-    await verifyAdminToken(token);
-    return NextResponse.next();
-  } catch {
-    return handleUnauthorized(req);
-  }
+  // Token verification happens in server routes/layout to avoid edge/env mismatch.
+  return NextResponse.next();
 }
 
 function handleUnauthorized(req: NextRequest) {
