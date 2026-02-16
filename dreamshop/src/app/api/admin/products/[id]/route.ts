@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { cookies } from "next/headers";
 import { prisma } from "@/lib/prisma";
-import { adminCookieName, verifyAdminToken } from "@/lib/auth";
+import {
+  adminCookieName,
+  getExpectedAdminCode,
+  isAdminAuthDisabled,
+  verifyAdminToken,
+} from "@/lib/auth";
 
 const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -41,23 +46,29 @@ const productPayloadSchema = z.object({
     .min(1),
 });
 
-async function requireAdmin() {
+async function requireAdmin(req: Request) {
+  if (isAdminAuthDisabled()) return true;
   const cookieStore = await cookies();
   const token = cookieStore.get(adminCookieName)?.value;
-  if (!token) return false;
-  try {
-    await verifyAdminToken(token);
-    return true;
-  } catch {
-    return false;
+  if (token) {
+    try {
+      await verifyAdminToken(token);
+      return true;
+    } catch {
+      // continue to fallback
+    }
   }
+
+  const headerCode = req.headers.get("x-admin-code")?.trim();
+  if (!headerCode) return false;
+  return headerCode === getExpectedAdminCode();
 }
 
 export async function PUT(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!(await requireAdmin())) {
+  if (!(await requireAdmin(req))) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
@@ -116,10 +127,10 @@ export async function PUT(
 }
 
 export async function DELETE(
-  _req: Request,
+  req: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!(await requireAdmin())) {
+  if (!(await requireAdmin(req))) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
@@ -131,4 +142,3 @@ export async function DELETE(
     return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });
   }
 }
-

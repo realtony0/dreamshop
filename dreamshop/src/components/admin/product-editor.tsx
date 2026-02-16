@@ -44,6 +44,11 @@ const colorHexMap: Record<string, string> = {
   marron: "#6f4e37",
 };
 
+function getStoredAdminCode() {
+  if (typeof window === "undefined") return "";
+  return window.localStorage.getItem("ds_admin_code") ?? "";
+}
+
 function slugify(input: string) {
   return input
     .trim()
@@ -171,9 +176,12 @@ export function ProductEditor({
     const formData = new FormData();
     formData.append("file", file);
 
+    const adminCode = getStoredAdminCode();
     const response = await fetch("/api/admin/upload", {
       method: "POST",
       body: formData,
+      credentials: "include",
+      headers: adminCode ? { "x-admin-code": adminCode } : undefined,
     });
     const data = (await response.json()) as {
       ok?: boolean;
@@ -280,10 +288,15 @@ export function ProductEditor({
     const method = productId ? "PUT" : "POST";
 
     try {
+      const adminCode = getStoredAdminCode();
       const response = await fetch(endpoint, {
         method,
-        headers: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json",
+          ...(adminCode ? { "x-admin-code": adminCode } : {}),
+        },
         body: JSON.stringify(payload),
+        credentials: "include",
       });
       const data = (await response.json()) as { ok?: boolean; error?: string };
       if (!response.ok || !data.ok) {
@@ -307,8 +320,11 @@ export function ProductEditor({
     setSaving(true);
     setError(null);
     try {
+      const adminCode = getStoredAdminCode();
       const response = await fetch(`/api/admin/products/${productId}`, {
         method: "DELETE",
+        credentials: "include",
+        headers: adminCode ? { "x-admin-code": adminCode } : undefined,
       });
       if (!response.ok) {
         const data = (await response.json()) as { error?: string };

@@ -70,6 +70,7 @@ Pour la prod, n’utilise pas `file:./dev.db` (SQLite local). Utilise une DB lib
 - `TURSO_AUTH_TOKEN=<ton-token>` (ou `DATABASE_AUTH_TOKEN`)
 - `ADMIN_CODE=1508` (ou ton nouveau code)
 - `ADMIN_SESSION_SECRET=<long-secret-random>`
+- `ADMIN_AUTH_DISABLED=true` (désactive le pin admin)
 - `NEXT_PUBLIC_DEFAULT_THEME=white`
 - `NEXT_PUBLIC_ENABLE_PWA=0` (mettre `1` seulement si tu veux activer le service worker)
 

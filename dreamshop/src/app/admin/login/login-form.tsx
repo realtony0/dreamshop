@@ -15,9 +15,22 @@ type LoginFormProps = {
 
 export function LoginForm({ nextPath, action }: LoginFormProps) {
   const [state, formAction, pending] = React.useActionState(action, {});
+  const handleSubmit = React.useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      const formData = new FormData(event.currentTarget);
+      const code = String(formData.get("code") ?? "").trim();
+      if (!code) return;
+      try {
+        window.localStorage.setItem("ds_admin_code", code);
+      } catch {
+        // ignore storage errors
+      }
+    },
+    []
+  );
 
   return (
-    <form action={formAction} className="mt-8 grid gap-5">
+    <form action={formAction} onSubmit={handleSubmit} className="mt-8 grid gap-5">
       <input type="hidden" name="next" value={nextPath} />
 
       <div className="grid gap-2">

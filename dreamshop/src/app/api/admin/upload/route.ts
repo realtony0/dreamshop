@@ -3,7 +3,12 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { adminCookieName, verifyAdminToken } from "@/lib/auth";
+import {
+  adminCookieName,
+  getExpectedAdminCode,
+  isAdminAuthDisabled,
+  verifyAdminToken,
+} from "@/lib/auth";
 
 export const runtime = "nodejs";
 
@@ -15,20 +20,26 @@ const allowedMimeToExt: Record<string, string> = {
   "image/avif": ".avif",
 };
 
-async function requireAdmin() {
+async function requireAdmin(req: Request) {
+  if (isAdminAuthDisabled()) return true;
   const cookieStore = await cookies();
   const token = cookieStore.get(adminCookieName)?.value;
-  if (!token) return false;
-  try {
-    await verifyAdminToken(token);
-    return true;
-  } catch {
-    return false;
+  if (token) {
+    try {
+      await verifyAdminToken(token);
+      return true;
+    } catch {
+      // continue to fallback
+    }
   }
+
+  const headerCode = req.headers.get("x-admin-code")?.trim();
+  if (!headerCode) return false;
+  return headerCode === getExpectedAdminCode();
 }
 
 export async function POST(req: Request) {
-  if (!(await requireAdmin())) {
+  if (!(await requireAdmin(req))) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 

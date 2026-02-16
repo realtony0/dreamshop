@@ -8,6 +8,10 @@ type AdminTokenPayload = {
   email?: string;
 };
 
+export function isAdminAuthDisabled() {
+  return (process.env.ADMIN_AUTH_DISABLED ?? "true").trim() === "true";
+}
+
 function getAdminSessionSecret() {
   const secret = (
     process.env.ADMIN_SESSION_SECRET ?? "dev-only-change-me-admin-session-secret"
