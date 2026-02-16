@@ -23,11 +23,12 @@ export async function requireAdminSession() {
 
 export async function clearAdminSession() {
   const cookieStore = await cookies();
+  const isProd = process.env.NODE_ENV === "production";
   cookieStore.set(adminCookieName, "", {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: isProd ? "none" : "lax",
     path: "/",
-    secure: process.env.NODE_ENV === "production",
+    secure: isProd,
     maxAge: 0,
   });
 }

@@ -30,11 +30,12 @@ export async function adminLoginAction(
 
   const token = await createAdminToken();
   const cookieStore = await cookies();
+  const isProd = process.env.NODE_ENV === "production";
   cookieStore.set(adminCookieName, token, {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: isProd ? "none" : "lax",
     path: "/",
-    secure: process.env.NODE_ENV === "production",
+    secure: isProd,
     maxAge: 60 * 60 * 24 * 14,
   });
 
