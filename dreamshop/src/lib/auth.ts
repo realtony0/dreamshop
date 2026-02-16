@@ -9,13 +9,14 @@ type AdminTokenPayload = {
 };
 
 function getAdminSessionSecret() {
-  const secret =
-    process.env.ADMIN_SESSION_SECRET ?? "dev-only-change-me-admin-session-secret";
+  const secret = (
+    process.env.ADMIN_SESSION_SECRET ?? "dev-only-change-me-admin-session-secret"
+  ).trim();
   return new TextEncoder().encode(secret);
 }
 
 export function getExpectedAdminCode() {
-  return process.env.ADMIN_CODE ?? "1508";
+  return (process.env.ADMIN_CODE ?? "1508").trim();
 }
 
 export async function createAdminToken() {
