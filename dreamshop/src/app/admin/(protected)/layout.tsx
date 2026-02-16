@@ -7,6 +7,8 @@ import { Container } from "@/components/site/container";
 const navLink =
   "inline-flex h-10 items-center rounded-lg border border-border bg-bg px-3 text-[11px] font-black uppercase tracking-[0.14em] text-fg/75 transition hover:bg-muted hover:text-fg";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminProtectedLayout({
   children,
 }: {
