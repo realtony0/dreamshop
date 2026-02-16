@@ -32,12 +32,12 @@ export function CheckoutPage({
 
     const form = new FormData(e.currentTarget);
     const payload = {
-      email: String(form.get("email") ?? ""),
+      email: "",
       fullName: String(form.get("fullName") ?? ""),
       phone: String(form.get("phone") ?? ""),
       address1: String(form.get("address1") ?? ""),
       city: String(form.get("city") ?? ""),
-      country: String(form.get("country") ?? defaultCountry),
+      country: defaultCountry,
       items: items.map((i) => ({
         variantId: i.variantId,
         size: i.size,
@@ -116,29 +116,23 @@ export function CheckoutPage({
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="phone">Téléphone WhatsApp</Label>
+                  <Label htmlFor="phone">Téléphone</Label>
                   <Input id="phone" name="phone" required />
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="address1">Adresse</Label>
-                  <Input id="address1" name="address1" required />
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="grid gap-2">
-                    <Label htmlFor="city">Ville</Label>
-                    <Input id="city" name="city" required />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="country">Pays</Label>
-                    <Input id="country" name="country" defaultValue={defaultCountry} required />
-                  </div>
+                  <Label htmlFor="address1">Adresse complète</Label>
+                  <Input
+                    id="address1"
+                    name="address1"
+                    placeholder="Ex: Dakar, Liberté 6, Sénégal"
+                    required
+                  />
                 </div>
 
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email (optionnel)</Label>
-                  <Input id="email" name="email" type="email" />
+                  <Label htmlFor="city">Ville</Label>
+                  <Input id="city" name="city" required />
                 </div>
 
                 {error ? (
@@ -151,11 +145,11 @@ export function CheckoutPage({
                   disabled={pending}
                   className="h-12 w-full rounded-xl border border-border bg-fg text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90 disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  {pending ? "Redirection WhatsApp..." : "Commander via WhatsApp"}
+                  {pending ? "Traitement..." : "Commander maintenant"}
                 </button>
 
                 <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/45">
-                  La commande sera envoyee sur WhatsApp
+                  Confirmation par message apres envoi
                 </div>
               </div>
             </form>

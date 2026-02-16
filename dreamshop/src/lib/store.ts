@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 
 export type ShopFilters = {
@@ -6,6 +7,7 @@ export type ShopFilters = {
   color?: string;
   minPrice?: number;
   maxPrice?: number;
+  sort?: "newest" | "price_asc" | "price_desc";
 };
 
 export async function getFeaturedProducts(limit = 6) {
@@ -24,7 +26,15 @@ export async function getFeaturedProducts(limit = 6) {
 }
 
 export async function getProducts(filters: ShopFilters = {}) {
-  const { category, size, color, minPrice, maxPrice } = filters;
+  const { category, size, color, minPrice, maxPrice, sort } = filters;
+  const orderBy: Prisma.ProductOrderByWithRelationInput[] =
+    sort === "price_asc"
+      ? [{ priceCents: "asc" }, { updatedAt: "desc" }]
+      : sort === "price_desc"
+        ? [{ priceCents: "desc" }, { updatedAt: "desc" }]
+        : sort === "newest"
+          ? [{ updatedAt: "desc" }]
+          : [{ featured: "desc" }, { updatedAt: "desc" }];
 
   return await prisma.product.findMany({
     where: {
@@ -51,7 +61,7 @@ export async function getProducts(filters: ShopFilters = {}) {
         ? { priceCents: { lte: Math.round(maxPrice) } }
         : {}),
     },
-    orderBy: [{ featured: "desc" }, { updatedAt: "desc" }],
+    orderBy,
     include: {
       variants: {
         orderBy: { updatedAt: "desc" },

@@ -52,8 +52,7 @@ export default async function CheckoutSuccessPage({
             Merci {order.firstName}.
           </h1>
           <p className="mt-4 text-base text-fg/70">
-            Confirmation enregistree pour{" "}
-            <span className="font-bold text-fg">{order.email}</span>.
+            Confirmation enregistree. Nous te contactons rapidement.
           </p>
 
           <div className="mt-8 grid gap-3 border-t border-border pt-6 text-sm text-fg/75">
@@ -86,7 +85,7 @@ export default async function CheckoutSuccessPage({
               href={whatsappUrl}
               className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-fg px-6 text-sm font-black uppercase tracking-wider text-bg transition hover:bg-fg/90"
             >
-              Ouvrir WhatsApp
+              Ouvrir le message
             </Link>
             <Link
               href="/shop"

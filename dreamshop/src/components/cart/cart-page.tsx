@@ -144,7 +144,7 @@ export function CartPage() {
               </Link>
 
               <div className="mt-4 text-xs font-black uppercase tracking-[0.22em] text-fg/45">
-                Validation de commande sur WhatsApp
+                Validation de commande par message
               </div>
             </aside>
           </div>

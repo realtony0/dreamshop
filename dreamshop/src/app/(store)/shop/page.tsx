@@ -3,10 +3,12 @@ import { ProductCard } from "@/components/products/product-card";
 import { Container } from "@/components/site/container";
 import { prisma } from "@/lib/prisma";
 import { getProducts } from "@/lib/store";
+import { cn } from "@/lib/cn";
 
 export const dynamic = "force-dynamic";
 
 const sizeOrder = ["XS", "S", "M", "L", "XL", "XXL"];
+type SortOption = "newest" | "price_asc" | "price_desc";
 
 function parseMoney(value: unknown) {
   if (typeof value !== "string") return undefined;
@@ -22,6 +24,7 @@ function buildShopHref(filters: {
   color?: string;
   min?: string;
   max?: string;
+  sort?: string;
 }) {
   const sp = new URLSearchParams();
   if (filters.category) sp.set("category", filters.category);
@@ -29,6 +32,7 @@ function buildShopHref(filters: {
   if (filters.color) sp.set("color", filters.color);
   if (filters.min) sp.set("min", filters.min);
   if (filters.max) sp.set("max", filters.max);
+  if (filters.sort) sp.set("sort", filters.sort);
   const qs = sp.toString();
   return qs ? `/shop?${qs}` : "/shop";
 }
@@ -47,9 +51,14 @@ export default async function ShopPage({
   const color = typeof sp.color === "string" ? sp.color : undefined;
   const minPrice = parseMoney(sp.min);
   const maxPrice = parseMoney(sp.max);
+  const sort: SortOption =
+    typeof sp.sort === "string" &&
+    ["newest", "price_asc", "price_desc"].includes(sp.sort)
+      ? (sp.sort as SortOption)
+      : "newest";
 
   const [products, colorsRaw, sizesRaw] = await Promise.all([
-    getProducts({ category, size, color, minPrice, maxPrice }),
+    getProducts({ category, size, color, minPrice, maxPrice, sort }),
     prisma.productVariant.findMany({
       where: {
         product: { active: true, ...(category ? { category } : {}) },
@@ -80,11 +89,27 @@ export default async function ShopPage({
       return ai - bi;
     });
 
-  const hasFilters = Boolean(category || size || color || minPrice || maxPrice);
+  const hasFilters = Boolean(
+    category || size || color || minPrice || maxPrice || (sort && sort !== "newest")
+  );
   const min = typeof minPrice === "number" ? String(minPrice) : undefined;
   const max = typeof maxPrice === "number" ? String(maxPrice) : undefined;
   const filtersForm = (
     <form className="grid gap-5" method="get">
+      <div className="grid gap-2">
+        <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
+          Trier
+        </label>
+        <select
+          name="sort"
+          defaultValue={sort}
+          className="h-11 w-full rounded-xl border border-border bg-bg px-4 text-sm font-medium text-fg transition focus:border-accent/70 focus:outline-none focus:ring-2 focus:ring-accent/30"
+        >
+          <option value="newest">Nouveautes</option>
+          <option value="price_asc">Prix croissant</option>
+          <option value="price_desc">Prix decroissant</option>
+        </select>
+      </div>
       <div className="grid gap-2">
         <label className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
           Catégorie
@@ -185,6 +210,48 @@ export default async function ShopPage({
             </div>
           </div>
 
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <Link
+              href={buildShopHref({ category: undefined, size, color, min, max, sort })}
+              className={cn(
+                "rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] transition",
+                !category
+                  ? "bg-fg text-bg"
+                  : "bg-muted text-fg/70 hover:bg-muted/70"
+              )}
+            >
+              Tout
+            </Link>
+            <Link
+              href={buildShopHref({ category: "HOODIE", size, color, min, max, sort })}
+              className={cn(
+                "rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] transition",
+                category === "HOODIE"
+                  ? "bg-fg text-bg"
+                  : "bg-muted text-fg/70 hover:bg-muted/70"
+              )}
+            >
+              Pieces
+            </Link>
+            <Link
+              href={buildShopHref({ category: "SET", size, color, min, max, sort })}
+              className={cn(
+                "rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] transition",
+                category === "SET"
+                  ? "bg-fg text-bg"
+                  : "bg-muted text-fg/70 hover:bg-muted/70"
+              )}
+            >
+              Ensembles
+            </Link>
+
+            {sort && sort !== "newest" ? (
+              <div className="ml-auto text-xs font-black uppercase tracking-[0.18em] text-fg/55">
+                Tri actif
+              </div>
+            ) : null}
+          </div>
+
           {hasFilters ? (
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/50">
@@ -192,7 +259,7 @@ export default async function ShopPage({
               </div>
               {category ? (
                 <Link
-                  href={buildShopHref({ category: undefined, size, color, min, max })}
+                  href={buildShopHref({ category: undefined, size, color, min, max, sort })}
                   className="rounded-full bg-muted px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-fg/70 transition hover:bg-muted/70"
                 >
                   {category === "HOODIE" ? "Pieces" : "Ensembles"} ×
@@ -200,7 +267,7 @@ export default async function ShopPage({
               ) : null}
               {size ? (
                 <Link
-                  href={buildShopHref({ category, size: undefined, color, min, max })}
+                  href={buildShopHref({ category, size: undefined, color, min, max, sort })}
                   className="rounded-full bg-muted px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-fg/70 transition hover:bg-muted/70"
                 >
                   Taille {size} ×
@@ -208,7 +275,7 @@ export default async function ShopPage({
               ) : null}
               {color ? (
                 <Link
-                  href={buildShopHref({ category, size, color: undefined, min, max })}
+                  href={buildShopHref({ category, size, color: undefined, min, max, sort })}
                   className="rounded-full bg-muted px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-fg/70 transition hover:bg-muted/70"
                 >
                   {color} ×
@@ -216,7 +283,7 @@ export default async function ShopPage({
               ) : null}
               {min ? (
                 <Link
-                  href={buildShopHref({ category, size, color, min: undefined, max })}
+                  href={buildShopHref({ category, size, color, min: undefined, max, sort })}
                   className="rounded-full bg-muted px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-fg/70 transition hover:bg-muted/70"
                 >
                   Min {min} ×
@@ -224,7 +291,7 @@ export default async function ShopPage({
               ) : null}
               {max ? (
                 <Link
-                  href={buildShopHref({ category, size, color, min, max: undefined })}
+                  href={buildShopHref({ category, size, color, min, max: undefined, sort })}
                   className="rounded-full bg-muted px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-fg/70 transition hover:bg-muted/70"
                 >
                   Max {max} ×
@@ -240,33 +307,12 @@ export default async function ShopPage({
           ) : null}
         </div>
 
-        <details className="mt-6 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/60 lg:hidden">
-          <summary className="cursor-pointer list-none text-sm font-black uppercase tracking-[0.18em] text-fg/80">
-            Filtres
-          </summary>
-          <div className="mt-4">{filtersForm}</div>
-        </details>
+        <div className="mt-6 rounded-2xl bg-card p-4 shadow-sm ring-1 ring-border/60">
+          {filtersForm}
+        </div>
 
-        <div className="mt-6 grid gap-8 lg:mt-10 lg:grid-cols-[340px_1fr]">
-          <aside className="hidden h-fit rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/60 lg:block lg:sticky lg:top-24">
-            <div className="flex items-center justify-between">
-              <div className="text-xs font-black uppercase tracking-[0.22em] text-fg/70">
-                Filtres
-              </div>
-              {hasFilters ? (
-                <Link
-                  href="/shop"
-                  className="text-xs font-black uppercase tracking-[0.22em] text-fg/60 hover:text-fg"
-                >
-                  Reset
-                </Link>
-              ) : null}
-            </div>
-
-            <div className="mt-6">{filtersForm}</div>
-          </aside>
-
-        <section>
+        <div className="mt-8">
+          <section>
           {products.length === 0 ? (
             <div className="rounded-2xl bg-card p-10 text-sm text-fg/70 shadow-sm ring-1 ring-border/60">
               Aucun produit ne correspond à ces filtres.
