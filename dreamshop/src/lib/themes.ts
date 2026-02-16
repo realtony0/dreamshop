@@ -12,8 +12,6 @@ export function isThemeId(value: string): value is ThemeId {
   return themes.some((t) => t.id === value);
 }
 
-export const defaultTheme: ThemeId = isThemeId(
-  process.env.NEXT_PUBLIC_DEFAULT_THEME?.trim() ?? ""
-)
-  ? (process.env.NEXT_PUBLIC_DEFAULT_THEME as ThemeId)
-  : "crock";
+const envTheme = process.env.NEXT_PUBLIC_DEFAULT_THEME?.trim() ?? "";
+
+export const defaultTheme: ThemeId = isThemeId(envTheme) ? envTheme : "crock";
