@@ -33,6 +33,7 @@ export type ProductDraft = {
 };
 
 const quickColors = ["Noir", "Gris", "Blanc", "Beige", "Bleu", "Marron"] as const;
+const defaultStockQuantity = 999;
 
 const colorHexMap: Record<string, string> = {
   noir: "#0a0a0a",
@@ -53,7 +54,9 @@ function slugify(input: string) {
 }
 
 function emptyStock(): Record<Size, number> {
-  return Object.fromEntries(sizes.map((size) => [size, 0])) as Record<Size, number>;
+  return Object.fromEntries(
+    sizes.map((size) => [size, defaultStockQuantity])
+  ) as Record<Size, number>;
 }
 
 function guessColorHex(colorName: string) {
@@ -155,15 +158,6 @@ export function ProductEditor({
       if (current === index) return 0;
       if (current > index) return current - 1;
       return current;
-    });
-  }
-
-  function updateStock(index: number, size: Size, quantity: number) {
-    updateVariant(index, {
-      stock: {
-        ...draft.variants[index]?.stock,
-        [size]: Math.max(0, Number.isFinite(quantity) ? quantity : 0),
-      } as Record<Size, number>,
     });
   }
 
@@ -341,7 +335,7 @@ export function ProductEditor({
             {isEditing ? "Modifier produit" : "Nouveau produit"}
           </h1>
           <div className="mt-2 text-sm text-fg/65">
-            1) Infos  2) Couleurs + photos  3) Stock  4) Enregistrer
+            1) Infos  2) Couleurs + photos  3) Enregistrer
           </div>
         </div>
 
@@ -446,7 +440,7 @@ export function ProductEditor({
       <section className="grid gap-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="text-sm font-black uppercase tracking-[0.18em] text-fg/65">
-            Couleurs, photos et stock
+            Couleurs et photos
           </div>
           <button
             onClick={addVariant}
@@ -459,11 +453,6 @@ export function ProductEditor({
         <div className="grid gap-3">
           {draft.variants.map((variant, index) => {
             const isOpen = openVariantIndex === index;
-            const totalStock = sizes.reduce(
-              (sum, size) => sum + Number(variant.stock[size] ?? 0),
-              0
-            );
-
             return (
               <article
                 key={index}
@@ -484,8 +473,7 @@ export function ProductEditor({
                       </div>
                     </div>
                     <div className="mt-1 text-xs uppercase tracking-[0.14em] text-fg/45">
-                      {variant.images.length} photo{variant.images.length > 1 ? "s" : ""} •
-                      stock {totalStock}
+                      {variant.images.length} photo{variant.images.length > 1 ? "s" : ""}
                     </div>
                   </div>
 
@@ -596,26 +584,8 @@ export function ProductEditor({
                       )}
                     </div>
 
-                    <div className="grid gap-2">
-                      <div className="text-xs font-black uppercase tracking-[0.18em] text-fg/60">
-                        Stock par taille
-                      </div>
-                      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-                        {sizes.map((size) => (
-                          <div key={size} className="grid gap-1">
-                            <div className="text-[11px] font-black uppercase tracking-[0.12em] text-fg/55">
-                              {size}
-                            </div>
-                            <input
-                              type="number"
-                              min={0}
-                              value={variant.stock[size] ?? 0}
-                              onChange={(e) => updateStock(index, size, Number(e.target.value))}
-                              className="h-10 rounded-xl border border-border bg-bg px-3 text-sm text-fg outline-none transition focus:ring-2 focus:ring-accent/35"
-                            />
-                          </div>
-                        ))}
-                      </div>
+                    <div className="text-xs font-black uppercase tracking-[0.18em] text-fg/55">
+                      Stock gere automatiquement.
                     </div>
                   </div>
                 ) : null}
