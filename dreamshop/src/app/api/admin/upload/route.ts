@@ -3,6 +3,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { put } from "@vercel/blob";
 import {
   adminCookieName,
   getExpectedAdminCode,
@@ -19,6 +20,7 @@ const allowedMimeToExt: Record<string, string> = {
   "image/webp": ".webp",
   "image/avif": ".avif",
 };
+const blobToken = process.env.BLOB_READ_WRITE_TOKEN?.trim();
 
 async function requireAdmin(req: Request) {
   if (isAdminAuthDisabled()) return true;
@@ -74,6 +76,33 @@ export async function POST(req: Request) {
 
   const extFromName = path.extname(file.name || "").toLowerCase();
   const ext = allowedMimeToExt[file.type] ?? (extFromName || ".jpg");
+
+  if (blobToken) {
+    try {
+      const fileName = `admin/${Date.now()}-${randomUUID()}${ext}`;
+      const blob = await put(fileName, file, {
+        access: "public",
+        token: blobToken,
+        contentType: file.type,
+      });
+      return NextResponse.json({ ok: true, url: blob.url });
+    } catch {
+      return NextResponse.json(
+        { ok: false, error: "Upload impossible (blob)." },
+        { status: 500 }
+      );
+    }
+  }
+
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Upload non configuré. Ajoute BLOB_READ_WRITE_TOKEN.",
+      },
+      { status: 500 }
+    );
+  }
 
   const fileName = `${Date.now()}-${randomUUID()}${ext}`;
   const relativeDir = path.join("uploads", "admin");
