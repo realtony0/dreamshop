@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import {
   adminCookieName,
@@ -117,6 +118,9 @@ export async function PUT(
       },
     });
 
+    revalidatePath("/shop");
+    revalidatePath(`/products/${parsed.data.slug}`);
+
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
@@ -136,7 +140,15 @@ export async function DELETE(
 
   const { id } = await params;
   try {
+    const existing = await prisma.product.findUnique({
+      where: { id },
+      select: { slug: true },
+    });
     await prisma.product.delete({ where: { id } });
+    revalidatePath("/shop");
+    if (existing?.slug) {
+      revalidatePath(`/products/${existing.slug}`);
+    }
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ ok: false, error: "Not found" }, { status: 404 });

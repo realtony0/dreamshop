@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import {
   adminCookieName,
@@ -110,6 +111,9 @@ export async function POST(req: Request) {
       },
       select: { id: true },
     });
+
+    revalidatePath("/shop");
+    revalidatePath(`/products/${parsed.data.slug}`);
 
     return NextResponse.json({ ok: true, id: created.id });
   } catch {
