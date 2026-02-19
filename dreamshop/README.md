@@ -74,6 +74,7 @@ Pour la prod, n’utilise pas `file:./dev.db` (SQLite local). Utilise une DB lib
 - `BLOB_READ_WRITE_TOKEN=<token vercel blob>` (uploads images en prod)
 - `NEXT_PUBLIC_DEFAULT_THEME=white`
 - `NEXT_PUBLIC_ENABLE_PWA=0` (mettre `1` seulement si tu veux activer le service worker)
+- `WHATSAPP_ORDER_NUMBER=+221 783899477`
 
 2) Initialiser le schema sur la DB distante (une fois)
 

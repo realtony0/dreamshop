@@ -23,10 +23,13 @@ export type WhatsAppOrderPayload = {
   items: WhatsAppOrderLine[];
 };
 
-const fallbackNumber = "783899477";
+const fallbackNumber = "221783899477";
 
 export function getWhatsAppOrderNumber() {
-  return (process.env.WHATSAPP_ORDER_NUMBER ?? fallbackNumber).replace(/\D/g, "");
+  const normalized = (
+    process.env.WHATSAPP_ORDER_NUMBER ?? fallbackNumber
+  ).replace(/\D/g, "");
+  return normalized || fallbackNumber;
 }
 
 export function buildWhatsAppOrderMessage(order: WhatsAppOrderPayload) {
