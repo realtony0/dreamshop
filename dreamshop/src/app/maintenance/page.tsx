@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getMaintenanceMessage } from "@/lib/site-flags";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +21,15 @@ export default function MaintenancePage() {
 
         <div className="mt-8 text-xs uppercase tracking-[0.16em] text-fg/45">
           Merci de revenir dans quelques instants.
+        </div>
+
+        <div className="mt-8">
+          <Link
+            href="/admin"
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-fg px-5 text-xs font-black uppercase tracking-[0.14em] text-bg transition hover:bg-fg/90"
+          >
+            Acces admin
+          </Link>
         </div>
       </section>
     </div>

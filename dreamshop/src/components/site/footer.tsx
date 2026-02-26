@@ -16,8 +16,6 @@ export function Footer({
   tagline: string;
   links: FooterLink[];
 }) {
-  const publicLinks = links.filter((link) => !link.href.startsWith("/admin"));
-
   return (
     <footer
       className="border-t border-border/60 text-fg"
@@ -35,7 +33,7 @@ export function Footer({
         </div>
 
         <div className="grid gap-2 text-sm">
-          {publicLinks.map((link) => (
+          {links.map((link) => (
             <Link
               key={`${link.label}-${link.href}`}
               href={link.href}

@@ -93,6 +93,12 @@ export default async function CheckoutSuccessPage({
             >
               Retour boutique
             </Link>
+            <Link
+              href="/admin/orders"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-transparent px-6 text-sm font-black uppercase tracking-wider text-fg transition hover:bg-muted"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </Container>
