@@ -56,7 +56,7 @@ Logs : `.dev.log` (PID : `.dev.pid`).
 - `/admin/orders` gestion commandes + statut
 
 Identifiants (par défaut si non définis) :
-- code: `1508`
+- code: `150803`
 
 Recommandé : créer un `.env.local` à partir de `.env.example`.
 
@@ -68,9 +68,11 @@ Pour la prod, n’utilise pas `file:./dev.db` (SQLite local). Utilise une DB lib
 
 - `DATABASE_URL=libsql://<ta-db>.turso.io`
 - `TURSO_AUTH_TOKEN=<ton-token>` (ou `DATABASE_AUTH_TOKEN`)
-- `ADMIN_CODE=1508` (ou ton nouveau code)
+- `ADMIN_CODE=150803` (ou ton nouveau code)
 - `ADMIN_SESSION_SECRET=<long-secret-random>`
-- `ADMIN_AUTH_DISABLED=true` (désactive le pin admin)
+- `ADMIN_AUTH_DISABLED=false` (PIN admin actif)
+- `SITE_MAINTENANCE=true` (met la boutique en maintenance)
+- `SITE_MAINTENANCE_MESSAGE=Le site est temporairement en maintenance. Revenez bientot.`
 - `BLOB_READ_WRITE_TOKEN=<token vercel blob>` (uploads images en prod)
 - `NEXT_PUBLIC_DEFAULT_THEME=white`
 - `NEXT_PUBLIC_ENABLE_PWA=0` (mettre `1` seulement si tu veux activer le service worker)
