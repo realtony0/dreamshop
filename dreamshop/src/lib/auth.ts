@@ -9,7 +9,7 @@ type AdminTokenPayload = {
 };
 
 export function isAdminAuthDisabled() {
-  return (process.env.ADMIN_AUTH_DISABLED ?? "false").trim() === "true";
+  return (process.env.ADMIN_AUTH_DISABLED ?? "true").trim() === "true";
 }
 
 function getAdminSessionSecret() {
@@ -20,7 +20,7 @@ function getAdminSessionSecret() {
 }
 
 export function getExpectedAdminCode() {
-  return (process.env.ADMIN_CODE ?? "150803").trim();
+  return (process.env.ADMIN_CODE ?? "1508").trim();
 }
 
 export async function createAdminToken() {
