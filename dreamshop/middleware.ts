@@ -10,18 +10,16 @@ export async function middleware(req: NextRequest) {
 
   if (isMaintenanceModeEnabled()) {
     if (pathname === "/maintenance") return NextResponse.next();
-    if (pathname.startsWith("/api/") && !isAdminRoute) {
+    if (pathname.startsWith("/api/")) {
       return NextResponse.json(
         { error: "Maintenance en cours. Revenez bientot." },
         { status: 503 }
       );
     }
-    if (!isAdminRoute) {
-      const url = req.nextUrl.clone();
-      url.pathname = "/maintenance";
-      url.search = "";
-      return NextResponse.redirect(url);
-    }
+    const url = req.nextUrl.clone();
+    url.pathname = "/maintenance";
+    url.search = "";
+    return NextResponse.redirect(url);
   }
 
   if (!isAdminRoute) return NextResponse.next();

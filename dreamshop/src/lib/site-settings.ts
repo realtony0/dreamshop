@@ -66,7 +66,6 @@ const defaultSettings: SiteSettings = {
     links: [
       { label: "Boutique", href: "/shop" },
       { label: "Panier", href: "/cart" },
-      { label: "Admin", href: "/admin" },
     ],
   },
   checkout: {

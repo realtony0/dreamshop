@@ -60,6 +60,7 @@ export function Header({
   links: HeaderLink[];
 }) {
   const pathname = usePathname();
+  const publicLinks = links.filter((item) => !item.href.startsWith("/admin"));
 
   return (
     <header
@@ -98,7 +99,7 @@ export function Header({
 
         <nav className="hidden flex-1 items-center justify-center lg:flex">
           <div className="flex items-center space-x-1">
-            {links.map((item) => (
+            {publicLinks.map((item) => (
               <DesktopNavLink
                 key={item.href}
                 href={item.href}
