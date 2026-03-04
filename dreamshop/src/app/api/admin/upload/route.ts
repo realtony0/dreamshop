@@ -1,26 +1,11 @@
-import { randomUUID } from "node:crypto";
-import { mkdir, writeFile } from "node:fs/promises";
-import path from "node:path";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { put } from "@vercel/blob";
 import {
   adminCookieName,
   getExpectedAdminCode,
   isAdminAuthDisabled,
   verifyAdminToken,
 } from "@/lib/auth";
-
-export const runtime = "nodejs";
-
-const maxFileSize = 10 * 1024 * 1024;
-const allowedMimeToExt: Record<string, string> = {
-  "image/jpeg": ".jpg",
-  "image/png": ".png",
-  "image/webp": ".webp",
-  "image/avif": ".avif",
-};
-const blobToken = process.env.BLOB_READ_WRITE_TOKEN?.trim();
 
 async function requireAdmin(req: Request) {
   if (isAdminAuthDisabled()) return true;
@@ -45,80 +30,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
-  let formData: FormData;
-  try {
-    formData = await req.formData();
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "Form-data invalide." },
-      { status: 400 }
-    );
-  }
-
-  const file = formData.get("file");
-  if (!(file instanceof File)) {
-    return NextResponse.json({ ok: false, error: "Fichier manquant." }, { status: 400 });
-  }
-
-  if (!file.type.startsWith("image/")) {
-    return NextResponse.json(
-      { ok: false, error: "Le fichier doit être une image." },
-      { status: 400 }
-    );
-  }
-
-  if (file.size > maxFileSize) {
-    return NextResponse.json(
-      { ok: false, error: "Image trop lourde (max 10MB)." },
-      { status: 400 }
-    );
-  }
-
-  const extFromName = path.extname(file.name || "").toLowerCase();
-  const ext = allowedMimeToExt[file.type] ?? (extFromName || ".jpg");
-
-  if (blobToken) {
-    try {
-      const fileName = `admin/${Date.now()}-${randomUUID()}${ext}`;
-      const blob = await put(fileName, file, {
-        access: "public",
-        token: blobToken,
-        contentType: file.type,
-      });
-      return NextResponse.json({ ok: true, url: blob.url });
-    } catch {
-      return NextResponse.json(
-        { ok: false, error: "Upload impossible (blob)." },
-        { status: 500 }
-      );
-    }
-  }
-
-  if (process.env.VERCEL) {
-    return NextResponse.json(
-      {
-        ok: false,
-        error: "Upload non configuré. Ajoute BLOB_READ_WRITE_TOKEN.",
-      },
-      { status: 500 }
-    );
-  }
-
-  const fileName = `${Date.now()}-${randomUUID()}${ext}`;
-  const relativeDir = path.join("uploads", "admin");
-  const absoluteDir = path.join(process.cwd(), "public", relativeDir);
-  const absolutePath = path.join(absoluteDir, fileName);
-  const publicUrl = `/${relativeDir.replaceAll(path.sep, "/")}/${fileName}`;
-
-  try {
-    await mkdir(absoluteDir, { recursive: true });
-    const bytes = await file.arrayBuffer();
-    await writeFile(absolutePath, Buffer.from(bytes));
-    return NextResponse.json({ ok: true, url: publicUrl });
-  } catch {
-    return NextResponse.json(
-      { ok: false, error: "Upload impossible." },
-      { status: 500 }
-    );
-  }
+  return NextResponse.json(
+    {
+      ok: false,
+      error:
+        "Ajout temporairement indisponible : stockage sature. Reessaie plus tard.",
+    },
+    { status: 503 }
+  );
 }
