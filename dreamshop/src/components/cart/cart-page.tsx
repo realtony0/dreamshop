@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/cart/cart-context";
 import { Container } from "@/components/site/container";
 import { cn } from "@/lib/cn";
 import { formatMoney } from "@/lib/money";
+import { SafeImage } from "@/components/ui/safe-image";
 
 export function CartPage() {
   const { items, removeItem, setQuantity, subtotalCents } = useCart();
@@ -48,7 +48,7 @@ export function CartPage() {
                 >
                   <div className="relative h-24 w-20 overflow-hidden rounded-xl border border-border bg-muted md:h-28 md:w-24">
                     {item.imageUrl ? (
-                      <Image
+                      <SafeImage
                         src={item.imageUrl}
                         alt={item.name}
                         fill

@@ -1,12 +1,12 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/cart/cart-context";
 import { Container } from "@/components/site/container";
 import { cn } from "@/lib/cn";
 import { formatMoney } from "@/lib/money";
+import { SafeImage } from "@/components/ui/safe-image";
 
 type ProductDetailProps = {
   product: {
@@ -107,7 +107,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <div className="relative overflow-hidden rounded-2xl bg-card shadow-sm ring-1 ring-border/50">
               <div className="relative aspect-[4/5] w-full">
                 {activeImageUrl ? (
-                  <Image
+                  <SafeImage
                     src={activeImageUrl}
                     alt={product.name}
                     fill
@@ -137,7 +137,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                     aria-label="Voir l'image"
                   >
                     <div className="relative aspect-square">
-                      <Image
+                      <SafeImage
                         src={img.url}
                         alt={img.alt ?? product.name}
                         fill

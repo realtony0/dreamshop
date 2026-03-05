@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { formatMoney } from "@/lib/money";
 import { cn } from "@/lib/cn";
+import { SafeImage } from "@/components/ui/safe-image";
 
 type ProductCardProps = {
   product: {
@@ -39,7 +39,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
         {image1 ? (
           <>
-            <Image
+            <SafeImage
               src={image1.url}
               alt={image1.alt ?? product.name}
               fill
@@ -51,7 +51,7 @@ export function ProductCard({ product }: ProductCardProps) {
               priority={false}
             />
             {image2 ? (
-              <Image
+              <SafeImage
                 src={image2.url}
                 alt={image2.alt ?? product.name}
                 fill
