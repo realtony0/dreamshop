@@ -93,6 +93,9 @@ export default async function AdminDashboardPage() {
             <Link href="/admin/site/checkout" className="rounded-xl border border-border bg-bg px-4 py-3 text-fg/80 hover:bg-muted">
               Formulaire de commande
             </Link>
+            <Link href="/admin/recovery" className="rounded-xl border border-border bg-bg px-4 py-3 text-fg/80 hover:bg-muted">
+              Récupération images
+            </Link>
           </div>
         </div>
 

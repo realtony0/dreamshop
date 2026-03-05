@@ -37,6 +37,9 @@ export default async function AdminProtectedLayout({
             <Link href="/admin/products" className={navLink}>
               Produits
             </Link>
+            <Link href="/admin/recovery" className={navLink}>
+              Images
+            </Link>
             <Link href="/admin/orders" className={navLink}>
               Commandes
             </Link>
